@@ -132,7 +132,7 @@ function openHistory() {
         historyBody.innerHTML = `
             <div class="empty-history">
                 <i class="fa-solid fa-box-open"></i>
-                <p>No tienes compras registradas en este dispositivo.</p>
+                <p>Aún no tiene adquisiciones registradas.</p>
             </div>
         `;
         return;
