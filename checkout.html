@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Checkout - Pass Digital</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .checkout-container {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .checkout-header h1 {
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .cart-summary {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .cart-summary h3 {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-summary .total-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .payment-method {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            background-color: rgba(99, 102, 241, 0.05);
+        }
+
+        .payment-method i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .method-info {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .method-number {
+            font-size: 1.2rem;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            user-select: all;
+            margin-top: 5px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: var(--primary-hover);
+        }
+
+        .whatsapp-confirm {
+            margin-top: 2.5rem;
+            background-color: var(--whatsapp);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .whatsapp-confirm:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .copy-btn {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            opacity: 0.6;
+            padding: 2px 4px;
+        }
+
+        .copy-btn:hover {
+            color: #ffffff;
+            transform: scale(1.1);
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="navbar" style="justify-content: center;">
+        <div class="brand-name">
+            <a href="index.html" style="text-decoration: none;">
+                <h1>Pass Digital</h1>
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="checkout-container">
+            <div class="checkout-header">
+                <h1>Finalizar Compra</h1>
+                <p>Selecciona tu método de pago preferido, realiza el pago y envíanos tu comprobante mediante WhatsApp.
+                </p>
+            </div>
+
+            <div class="cart-summary">
+                <h3>Total a Pagar</h3>
+                <div class="total-amount" id="displayTotal">$0.00</div>
+            </div>
+
+            <div class="payment-methods" <!-- Yape -->
+                <div class="payment-method yape method-pen" style="display: none;">
+                    <i class="fa-solid fa-mobile-screen-button" style="color: #8A2B6D;"></i>
+                    <div class="method-info">Yape</div>
+                    <div class="method-number"
+                        style="display:flex; align-items:center; justify-content:center; gap:0.5rem;">+51 943 470 201 <i
+                            class="fa-regular fa-copy copy-btn" data-copy="+51943470201" title="Copiar"></i></div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;">A nombre de: Maurizio Jesús
+                        Achata Culque</p>
+                </div>
+                <!-- Plin -->
+                <div class="payment-method plin method-pen" style="display: none;">
+                    <i class="fa-solid fa-mobile-screen-button" style="color: #00B1A0;"></i>
+                    <div class="method-info">Plin</div>
+                    <div class="method-number"
+                        style="display:flex; align-items:center; justify-content:center; gap:0.5rem;">+51 943 470 201 <i
+                            class="fa-regular fa-copy copy-btn" data-copy="+51943470201" title="Copiar"></i></div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;">A nombre de: Maurizio Jesús
+                        Achata Culque</p>
+                </div>
+                <!-- Transferencia BCP -->
+                <div class="payment-method transfer method-pen" style="display: none;">
+                    <i class="fa-solid fa-building-columns" style="color: #3b82f6;"></i>
+                    <div class="method-info">Transf. Bancaria (BCP)</div>
+                    <div class="method-number"
+                        style="font-size: 1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CTA: 19111431957030 <i class="fa-regular fa-copy copy-btn" data-copy="19111431957030"
+                            title="Copiar"></i></div>
+                    <div class="method-number"
+                        style="font-size: 1rem; margin-top:0.3rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CCI: 00219111143195703053 <i class="fa-regular fa-copy copy-btn"
+                            data-copy="00219111143195703053" title="Copiar"></i></div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;">A nombre de: Maurizio Jesús
+                        Achata Culque</p>
+                </div>
+                <!-- Transferencia BBVA -->
+                <div class="payment-method transfer method-pen" style="display: none;">
+                    <i class="fa-solid fa-building-columns" style="color: #004481;"></i>
+                    <div class="method-info">Transf. Bancaria (BBVA)</div>
+                    <div class="method-number"
+                        style="font-size: 1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CTA: 0011-0814-0266500861 <i class="fa-regular fa-copy copy-btn" data-copy="001108140266500861"
+                            title="Copiar"></i></div>
+                    <div class="method-number"
+                        style="font-size: 1rem; margin-top:0.3rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CCI: 01181400026650086117 <i class="fa-regular fa-copy copy-btn"
+                            data-copy="01181400026650086117" title="Copiar"></i></div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;">A nombre de: Maurizio Jesús
+                        Achata Culque</p>
+                </div>
+                <!-- Transferencia Scotiabank -->
+                <div class="payment-method transfer method-pen" style="display: none;">
+                    <i class="fa-solid fa-building-columns" style="color: #ed2124;"></i>
+                    <div class="method-info">Transf. Bancaria (Scotiabank)</div>
+                    <div class="method-number"
+                        style="font-size: 1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CTA: 5622202280 <i class="fa-regular fa-copy copy-btn" data-copy="5622202280"
+                            title="Copiar"></i></div>
+                    <div class="method-number"
+                        style="font-size: 1rem; margin-top:0.3rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CCI: 00901020562220228008 <i class="fa-regular fa-copy copy-btn"
+                            data-copy="00901020562220228008" title="Copiar"></i></div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;">A nombre de: Maurizio Jesús
+                        Achata Culque</p>
+                </div>
+                <!-- Binance -->
+                <div class="payment-method binance method-usd" style="display: none;">
+                    <i class="fa-brands fa-bitcoin" style="color: #F3BA2F;"></i>
+                    <div class="method-info">Binance (USDT)</div>
+                    <div class="method-number"
+                        style="font-size: 1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        Pay ID:
+                        <span
+                            style="font-size:0.8rem; word-break:break-all;">0x7ba7b788faf6999da03455abc4f171635c0ae8fc</span>
+                        <i class="fa-regular fa-copy copy-btn" data-copy="0x7ba7b788faf6999da03455abc4f171635c0ae8fc"
+                            title="Copiar"></i>
+                    </div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;">Red: USDT (TetherUS) -> BNB Smart
+                        Chain (BEP20)</p>
+                </div>
+
+                <div class="payment-method transfer method-usd" style="display: none;">
+                    <i class="fa-solid fa-building-columns" style="color: #3b82f6;"></i>
+                    <div class="method-info">Transf. Bancaria BCP (USD)</div>
+                    <div class="method-number"
+                        style="font-size: 1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CTA: 19112033375123 <i class="fa-regular fa-copy copy-btn" data-copy="19112033375123"
+                            title="Copiar"></i></div>
+                    <div class="method-number"
+                        style="font-size: 1rem; margin-top:0.3rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CCI: 00219111203337512353 <i class="fa-regular fa-copy copy-btn"
+                            data-copy="00219111203337512353" title="Copiar"></i></div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;">A nombre de: Maurizio Jesús
+                        Achata Culque</p>
+                </div>
+
+                <div class="payment-method transfer method-usd" style="display: none;">
+                    <i class="fa-solid fa-building-columns" style="color: #004481;"></i>
+                    <div class="method-info">Transf. Bancaria BBVA (USD)</div>
+                    <div class="method-number"
+                        style="font-size: 1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CTA: 0011-0814-0280051298 <i class="fa-regular fa-copy copy-btn"
+                            data-copy="0011-0814-0280051298" title="Copiar"></i></div>
+                    <div class="method-number"
+                        style="font-size: 1rem; margin-top:0.3rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CCI: 01181400028005129816 <i class="fa-regular fa-copy copy-btn"
+                            data-copy="01181400028005129816" title="Copiar"></i></div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;">A nombre de: Maurizio Jesús
+                        Achata Culque</p>
+                </div>
+
+                <div class="payment-method transfer method-usd" style="display: none;">
+                    <i class="fa-solid fa-building-columns" style="color: #ed2124;"></i>
+                    <div class="method-info">Transf. Bancaria Scotiabank (USD)</div>
+                    <div class="method-number"
+                        style="font-size: 1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CTA: 5622287975 <i class="fa-regular fa-copy copy-btn" data-copy="5622287975"
+                            title="Copiar"></i></div>
+                    <div class="method-number"
+                        style="font-size: 1rem; margin-top:0.3rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CCI: 00901021562228797509 <i class="fa-regular fa-copy copy-btn"
+                            data-copy="00901021562228797509" title="Copiar"></i></div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;">A nombre de: Maurizio Jesús
+                        Achata Culque</p>
+                </div>
+
+
+            </div>
+
+            <a href="https://wa.me/51943470201" target="_blank" class="whatsapp-confirm" id="waConfirmBtn">
+                <i class="fa-brands fa-whatsapp"></i> Enviar comprobante por WhatsApp
+            </a>
+
+            <div style="text-align: center;">
+                <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Volver a la tienda</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const total = localStorage.getItem('cartTotal') || '$0.00';
+            const preferredCurrency = localStorage.getItem('preferredCurrency') || 'PEN';
+
+            // Render total correctly depending on chosen currency
+            let displayedTotal = total;
+            if (preferredCurrency === 'USD') {
+                const usdPart = total.split(' / ')[1] || total;
+                displayedTotal = usdPart;
+            } else {
+                const penPart = total.split(' / ')[0] || total;
+                displayedTotal = penPart;
+            }
+            document.getElementById('displayTotal').innerText = displayedTotal;
+
+            // Show payment methods based on preferred currency
+            if (preferredCurrency === 'PEN') {
+                document.querySelectorAll('.method-pen').forEach(el => el.style.display = 'flex');
+                document.querySelectorAll('.method-usd').forEach(el => el.style.display = 'none');
+            } else {
+                document.querySelectorAll('.method-pen').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.method-usd').forEach(el => el.style.display = 'flex');
+            }
+
+            const waBtn = document.getElementById('waConfirmBtn');
+            const phone = "51943470201"; // Número real con código de país
+
+            let itemsText = "";
+            try {
+                const cartItemsStr = localStorage.getItem('cartItems');
+                if (cartItemsStr) {
+                    const cartItems = JSON.parse(cartItemsStr);
+                    if (Array.isArray(cartItems) && cartItems.length > 0) {
+                        itemsText = cartItems.map(item => `- ${item.name} (${item.pricePEN.toFixed(2)} PEN / $${item.priceUSD.toFixed(2)} USD)`).join('\n');
+                    }
+                }
+            } catch (e) {
+                console.error("Error parsing cart items", e);
+            }
+
+            const textoBase = `Hola, hice un pedido de\n${itemsText ? itemsText + '\n' : ''}Le envío el comprobante de pago.`;
+            const mensaje = encodeURIComponent(textoBase);
+            waBtn.href = `https://wa.me/${phone}?text=${mensaje}`;
+
+            // Save to history on click
+            waBtn.addEventListener('click', () => {
+                try {
+                    const cartItemsStr = localStorage.getItem('cartItems');
+                    if (!cartItemsStr) return;
+                    
+                    let cartItemsArr = JSON.parse(cartItemsStr);
+                    if (!Array.isArray(cartItemsArr) || cartItemsArr.length === 0) return;
+                    
+                    let history = [];
+                    const historyStr = localStorage.getItem('purchaseHistory');
+                    if (historyStr) {
+                        history = JSON.parse(historyStr);
+                    }
+                    
+                    const dateObj = new Date();
+                    const date = dateObj.toLocaleDateString() + ' ' + dateObj.toLocaleTimeString();
+                    
+                    history.push({
+                        date: date,
+                        total: displayedTotal,
+                        items: cartItemsArr
+                    });
+                    
+                    localStorage.setItem('purchaseHistory', JSON.stringify(history));
+                    
+                    // Opcional: vaciar carrito despues de comprar (el usuario prefirió no hacerlo en index, así que lo dejamos intacto de momento para que no se asuste)
+                } catch(e) {
+                    console.error("Error al guardar historial de compra", e);
+                }
+            });
+
+            // Lógica de los botones de copiar
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const text = btn.getAttribute('data-copy');
+                    navigator.clipboard.writeText(text).then(() => {
+                        // Cambiar icono temporalmente a un check
+                        btn.classList.remove('fa-regular', 'fa-copy');
+                        btn.classList.add('fa-solid', 'fa-check');
+                        btn.style.color = '#25d366'; // color éxito
+
+                        setTimeout(() => {
+                            btn.classList.remove('fa-solid', 'fa-check');
+                            btn.classList.add('fa-regular', 'fa-copy');
+                            btn.style.color = '';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error("Error al copiar texto: ", err);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

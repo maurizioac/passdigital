@@ -1,0 +1,607 @@
+[
+    {
+        "id": "hbo",
+        "name": "HBO",
+        "type": "dual",
+        "icon": "fa-tv",
+        "profileA": {
+            "desc": "HBO STANDAR.",
+            "instructions": "No usar más de un dispositivo ni realizar cambios en los ajustes ni perfiles.",
+            "price": 2.10,
+            "pricePEN": 7,
+            "priceDisplay": "7 PEN / 2.10 USD"
+        },
+        "profileB": {
+            "desc": "HBO PLATINO.",
+            "instructions": "No usar más de un dispositivo ni realizar cambios en los ajustes ni perfiles.",
+            "price": 2.60,
+            "pricePEN": 9,
+            "priceDisplay": "9 PEN / 2.60 USD"
+        },
+        "full": {
+            "desc": "Cuenta completa privada. Hasta 4 a 5 pantallas simultáneas. Ideal para la familia.",
+            "instructions": "No tocar nada de la cuenta o se le quita la garantía.",
+            "price": 4.60,
+            "pricePEN": 16,
+            "priceDisplay": "16 PEN / 4.60 USD"
+        }
+    },
+    {
+        "id": "crunchyroll",
+        "name": "Crunchyroll",
+        "type": "dual",
+        "icon": "fa-dragon",
+        "profileA": {
+            "desc": "CRUNCHYROLL.",
+            "instructions": "No usar más de un dispositivo ni realizar cambios en los ajustes ni perfiles.",
+            "price": 2.30,
+            "pricePEN": 8,
+            "priceDisplay": "8 PEN / 2.30 USD"
+        },
+        "full": {
+            "desc": "Cuenta completa privada. Hasta 4 a 5 pantallas simultáneas. Ideal para la familia.",
+            "instructions": "No tocar nada de la cuenta o se le quita la garantía.",
+            "price": 3.45,
+            "pricePEN": 12,
+            "priceDisplay": "12 PEN / 3.45 USD"
+        }
+    },
+    {
+        "id": "disney",
+        "name": "Disney",
+        "type": "dual",
+        "icon": "fa-wand-magic-sparkles",
+        "title": "¿Desea cuenta completa o por perfil?",
+        "subtext": "Las cuentas son renovables",
+        "profileA": {
+            "desc": "DISNEY STANDAR.",
+            "instructions": "No usar más de un dispositivo ni realizar cambios en los ajustes ni perfiles.",
+            "price": 2.30,
+            "pricePEN": 8,
+            "priceDisplay": "8 PEN / 2.30 USD"
+        },
+        "profileB": {
+            "desc": "DISNEY PREMIUM (+ESPN).",
+            "instructions": "No usar más de un dispositivo ni realizar cambios en los ajustes ni perfiles.",
+            "price": 3.55,
+            "pricePEN": 12,
+            "priceDisplay": "12 PEN / 3.55 USD"
+        },
+        "full": {
+            "desc": "Cuenta completa privada. Hasta 4 a 5 pantallas simultáneas. Ideal para la familia.",
+            "instructions": "No tocar nada de la cuenta o se le quita la garantía.",
+            "price": 8.76,
+            "pricePEN": 30,
+            "priceDisplay": "30 PEN / 8.76 USD"
+        }
+    },
+    {
+        "id": "paramount",
+        "name": "Paramount",
+        "type": "dual",
+        "icon": "fa-mountain",
+        "title": "¿Desea cuenta completa o por perfil?",
+        "subtext": "Las cuentas son renovables",
+        "profileA": {
+            "desc": "PARAMOUNT PLUS.",
+            "instructions": "No usar más de un dispositivo ni realizar cambios en los ajustes ni perfiles.",
+            "price": 2.90,
+            "pricePEN": 10,
+            "priceDisplay": "10 PEN / 2.90 USD"
+        },
+        "full": {
+            "desc": "Cuenta completa privada. Hasta 4 a 5 pantallas simultáneas. Ideal para la familia.",
+            "instructions": "No tocar nada de la cuenta o se le quita la garantía.",
+            "price": 4.35,
+            "pricePEN": 15,
+            "priceDisplay": "15 PEN / 4.35 USD"
+        }
+    },
+    {
+        "id": "netflix",
+        "name": "Netflix",
+        "type": "dual",
+        "icon": "fa-play",
+        "title": "¿Desea cuenta completa o por perfil?",
+        "subtext": "Las cuentas son renovables",
+        "profileA": {
+            "desc": "NETFLIX.",
+            "instructions": "No usar más de un dispositivo ni realizar cambios en los ajustes ni perfiles.",
+            "price": 5.21,
+            "pricePEN": 18,
+            "priceDisplay": "18 PEN / 5.21 USD"
+        },
+        "full": {
+            "desc": "Cuenta completa privada. Hasta 4 a 5 pantallas simultáneas. Ideal para la familia.",
+            "instructions": "No tocar nada de la cuenta o se le quita la garantía.",
+            "price": 3.91,
+            "pricePEN": 42,
+            "priceDisplay": "48 PEN / 3.91 USD"
+        }
+    },
+    {
+        "id": "prime",
+        "name": "Prime Video",
+        "type": "triple",
+        "icon": "fa-video",
+        "title": "¿Desea cuenta completa o por perfil?",
+        "subtext": "Las cuentas son renovables",
+        "profileA": {
+            "desc": "AMAZON PRIME VIDEO.",
+            "instructions": "No usar más de un dispositivo ni realizar cambios en los ajustes ni perfiles.",
+            "price": 2.30,
+            "pricePEN": 8,
+            "priceDisplay": "8 PEN / 2.30 USD"
+        },
+        "full": {
+            "desc": "Cuenta completa privada. Hasta 4 a 5 pantallas simultáneas. Ideal para la familia.",
+            "instructions": "No tocar nada de la cuenta o se le quita la garantía.",
+            "price": 5.30,
+            "pricePEN": 19,
+            "priceDisplay": "19 PEN / 5.30 USD"
+        }
+    },
+    {
+        "id": "paramount2",
+        "name": "Paramount",
+        "type": "dual",
+        "icon": "fa-mountain",
+        "title": "¿Desea cuenta completa o por perfil?",
+        "subtext": "Las cuentas son renovables",
+        "profileA": {
+            "desc": "PARAMOUNT.",
+            "instructions": "No usar más de un dispositivo ni realizar cambios en los ajustes ni perfiles.",
+            "price": 3.18,
+            "pricePEN": 11,
+            "priceDisplay": "11 PEN / 3.18 USD"
+        },
+        "full": {
+            "desc": "Cuenta completa privada. Hasta 4 a 5 pantallas simultáneas. Ideal para la familia.",
+            "instructions": "No tocar nada de la cuenta o se le quita la garantía.",
+            "price": 4.34,
+            "pricePEN": 15,
+            "priceDisplay": "15 PEN / 4.34 USD"
+        }
+    },
+    {
+        "id": "apple",
+        "name": "Apple TV+",
+        "type": "single",
+        "icon": "fa-play",
+        "title": "¿Desea cuenta completa o por perfil?",
+        "subtext": "Las cuentas son renovables",
+        "profileA": {
+            "desc": "APPLE TV+.",
+            "instructions": "No usar más de un dispositivo ni realizar cambios en los ajustes ni perfiles.",
+            "price": 2.60,
+            "pricePEN": 9,
+            "priceDisplay": "9 PEN / 2.60 USD"
+        },
+        "full": {
+            "desc": "Cuenta completa privada. Hasta 4 a 5 pantallas simultáneas. Ideal para la familia.",
+            "instructions": "No tocar nada de la cuenta o se le quita la garantía.",
+            "price": 3.18,
+            "pricePEN": 11,
+            "priceDisplay": "11 PEN / 3.18 USD"
+        }
+    },
+    {
+        "id": "magistv",
+        "name": "MagisTV / Xupertv",
+        "type": "single",
+        "icon": "fa-broadcast-tower",
+        "title": "¿Desea cuenta completa o por perfil?",
+        "subtext": "Las cuentas son renovables",
+        "profileA": {
+            "desc": "MAGISTV.",
+            "instructions": "No usar más de un dispositivo ni realizar cambios en los ajustes ni perfiles.",
+            "price": 3.19,
+            "pricePEN": 11,
+            "priceDisplay": "11 PEN / 3.18 USD"
+        },
+        "full": {
+            "desc": "Cuenta completa privada. Hasta 4 a 5 pantallas simultáneas. Ideal para la familia.",
+            "instructions": "No tocar nada de la cuenta o se le quita la garantía.",
+            "price": 6.08,
+            "pricePEN": 21,
+            "priceDisplay": "21 PEN / 6.08 USD"
+        }
+    },
+    {
+        "id": "vix",
+        "name": "Vix",
+        "type": "single",
+        "icon": "fa-film",
+        "title": "¿Desea cuenta completa o por perfil?",
+        "subtext": "Las cuentas son renovables",
+        "profileA": {
+            "desc": "VIX.",
+            "instructions": "No usar más de un dispositivo ni realizar cambios en los ajustes ni perfiles.",
+            "price": 2.10,
+            "pricePEN": 7,
+            "priceDisplay": "7 PEN / 2.10 USD"
+        },
+        "full": {
+            "desc": "Cuenta completa privada. Hasta 4 a 5 pantallas simultáneas. Ideal para la familia.",
+            "instructions": "No tocar nada de la cuenta o se le quita la garantía.",
+            "price": 2.90,
+            "pricePEN": 10,
+            "priceDisplay": "10 PEN / 2.90 USD"
+        }
+    },
+    {
+        "id": "combos_streaming",
+        "name": "Combos Streaming",
+        "type": "bundle",
+        "icon": "fa-gift",
+        "desc": "Elige el combo de plataformas que mejor se adapte a tus necesidades. (Uso para un solo dispositivo, si inicia sesión en otro se le quita la garantía. Tampoco manipular nada de las cuentas)",
+        "subitems": [
+            {
+                "title": "Combos - Perfiles",
+                "options": [
+                    {
+                        "name": "HBO MAX + DISNEY",
+                        "priceUSD": 4.05,
+                        "pricePEN": 14.00
+                    },
+                    {
+                        "name": "HBO MAX + Prime Video",
+                        "priceUSD": 4.05,
+                        "pricePEN": 14.00
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "antivirus",
+        "name": "Software Antivirus",
+        "type": "bundle",
+        "icon": "fa-shield-halved",
+        "desc": "Elige la marca de tu preferencia y la cantidad de dispositivos que deseas proteger.",
+        "subitems": [
+            {
+                "title": "Avast Premium Security",
+                "options": [
+                    {
+                        "name": "1 Dispositivo - 1 Año",
+                        "priceUSD": 4.65,
+                        "pricePEN": 16.00
+                    },
+                    {
+                        "name": "3 Dispositivos - 1 Año",
+                        "priceUSD": 9.30,
+                        "pricePEN": 32.00
+                    },
+                    {
+                        "name": "10 Dispositivos - 1 Año",
+                        "priceUSD": 13.00,
+                        "pricePEN": 45.00
+                    }
+                ]
+            },
+            {
+                "title": "Avast Ultimate",
+                "options": [
+                    {
+                        "name": "1 Dispositivo - 1 Año",
+                        "priceUSD": 15.95,
+                        "pricePEN": 55.00
+                    }
+                ]
+            },
+            {
+                "title": "AVG Internet Security",
+                "options": [
+                    {
+                        "name": "1 Dispositivo - 1 Año",
+                        "priceUSD": 5.80,
+                        "pricePEN": 20.00
+                    },
+                    {
+                        "name": "10 Dispositivos - 1 Año",
+                        "priceUSD": 11.60,
+                        "pricePEN": 40.00
+                    }
+                ]
+            },
+            {
+                "title": "McAfee Premium Basic",
+                "options": [
+                    {
+                        "name": "1 Dispositivo - 1 Año",
+                        "priceUSD": 7.26,
+                        "pricePEN": 25.00
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "noping",
+        "name": "No Ping",
+        "type": "bundle",
+        "icon": "fa-gamepad",
+        "desc": "Optimiza tu conexión a internet y reduce el lag en tus juegos favoritos.",
+        "subitems": [
+            {
+                "title": "No Ping",
+                "options": [
+                    {
+                        "name": "Unidad",
+                        "priceUSD": 7.30,
+                        "pricePEN": 25.00
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "windows",
+        "name": "Licencias Windows",
+        "type": "bundle",
+        "icon": "fa-windows",
+        "desc": "Sistemas operativos originales de Microsoft. Actualizaciones vitalicias.",
+        "subitems": [
+            {
+                "title": "Windows 11 Pro Retail",
+                "options": [
+                    {
+                        "name": "Unidad",
+                        "priceUSD": 40.60,
+                        "pricePEN": 140.00
+                    }
+                ]
+            },
+            {
+                "title": "Windows 10 Pro Retail",
+                "options": [
+                    {
+                        "name": "Unidad",
+                        "priceUSD": 31.90,
+                        "pricePEN": 110.00
+                    }
+                ]
+            },
+            {
+                "title": "Windows 10 Pro OEM",
+                "options": [
+                    {
+                        "name": "Unidad",
+                        "priceUSD": 24.70,
+                        "pricePEN": 85.00
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "mayorista",
+        "name": "Mayorista",
+        "type": "bundle",
+        "icon": "fa-boxes-stacked",
+        "desc": "Catálogo exclusivo con precios especiales para compras al por mayor. (Escríbeme por WhatsApp - +51 943 470 201 para más detalles)",
+        "subitems": [
+            {
+                "title": "AVAST: Avast Premium Security (1 Año - 1 Dispositivo)",
+                "options": [
+                    {
+                        "name": "3 Unidades",
+                        "priceUSD": 12.20,
+                        "pricePEN": 42.00
+                    },
+                    {
+                        "name": "5 Unidades",
+                        "priceUSD": 20.30,
+                        "pricePEN": 70.00
+                    },
+                    {
+                        "name": "10 Unidades",
+                        "priceUSD": 40.60,
+                        "pricePEN": 140.00
+                    }
+                ]
+            },
+            {
+                "title": "AVAST: Avast Premium Security (1 Año - 3 Dispositivos)",
+                "options": [
+                    {
+                        "name": "3 Unidades",
+                        "priceUSD": 26.10,
+                        "pricePEN": 90.00
+                    },
+                    {
+                        "name": "5 Unidades",
+                        "priceUSD": 43.50,
+                        "pricePEN": 150.00
+                    },
+                    {
+                        "name": "10 Unidades",
+                        "priceUSD": 87.00,
+                        "pricePEN": 300.00
+                    }
+                ]
+            },
+            {
+                "title": "AVAST: Avast Premium Security (1 Año - 10 Dispositivos)",
+                "options": [
+                    {
+                        "name": "3 Unidades",
+                        "priceUSD": 46.10,
+                        "pricePEN": 159.00
+                    },
+                    {
+                        "name": "5 Unidades",
+                        "priceUSD": 62.35,
+                        "pricePEN": 215.00
+                    },
+                    {
+                        "name": "10 Unidades",
+                        "priceUSD": 124.70,
+                        "pricePEN": 430.00
+                    }
+                ]
+            },
+            {
+                "title": "AVAST: Avast Ultimate (1 Año - 1 Dispositivos)",
+                "options": [
+                    {
+                        "name": "3 Unidades",
+                        "priceUSD": 46.10,
+                        "pricePEN": 159.00
+                    },
+                    {
+                        "name": "5 Unidades",
+                        "priceUSD": 76.81,
+                        "pricePEN": 265.00
+                    },
+                    {
+                        "name": "10 Unidades",
+                        "priceUSD": 153.62,
+                        "pricePEN": 530.00
+                    }
+                ]
+            },
+            {
+                "title": "AVG: AVG Internet Security (1 Año - 1 Dispositivos)",
+                "options": [
+                    {
+                        "name": "3 Unidades",
+                        "priceUSD": 14.80,
+                        "pricePEN": 51.00
+                    },
+                    {
+                        "name": "5 Unidades",
+                        "priceUSD": 24.65,
+                        "pricePEN": 85.00
+                    },
+                    {
+                        "name": "10 Unidades",
+                        "priceUSD": 49.30,
+                        "pricePEN": 170.00
+                    }
+                ]
+            },
+            {
+                "title": "AVG: AVG Internet Security (1 Año - 10 Dispositivos)",
+                "options": [
+                    {
+                        "name": "3 Unidades",
+                        "priceUSD": 32.30,
+                        "pricePEN": 111.00
+                    },
+                    {
+                        "name": "5 Unidades",
+                        "priceUSD": 53.62,
+                        "pricePEN": 185.00
+                    },
+                    {
+                        "name": "10 Unidades",
+                        "priceUSD": 107.30,
+                        "pricePEN": 370.00
+                    }
+                ]
+            },
+            {
+                "title": "McAfee Premium Basic (1 Año - 3 Dispositivos)",
+                "options": [
+                    {
+                        "name": "3 Unidades",
+                        "priceUSD": 19.15,
+                        "pricePEN": 66.00
+                    },
+                    {
+                        "name": "5 Unidades",
+                        "priceUSD": 31.90,
+                        "pricePEN": 110.00
+                    },
+                    {
+                        "name": "10 Unidades",
+                        "priceUSD": 63.80,
+                        "pricePEN": 220.00
+                    }
+                ]
+            },
+            {
+                "title": "NOPING: No Ping (1 Dispositivo - 30 días)",
+                "options": [
+                    {
+                        "name": "3 Unidades",
+                        "priceUSD": 20.00,
+                        "pricePEN": 69.00
+                    },
+                    {
+                        "name": "5 Unidades",
+                        "priceUSD": 33.35,
+                        "pricePEN": 115.00
+                    },
+                    {
+                        "name": "10 Unidades",
+                        "priceUSD": 66.67,
+                        "pricePEN": 230.00
+                    }
+                ]
+            },
+            {
+                "title": "Windows 11 Pro Retail",
+                "options": [
+                    {
+                        "name": "3 Unidades",
+                        "priceUSD": 119.15,
+                        "pricePEN": 411.00
+                    },
+                    {
+                        "name": "5 Unidades",
+                        "priceUSD": 198.55,
+                        "pricePEN": 685.00
+                    },
+                    {
+                        "name": "10 Unidades",
+                        "priceUSD": 397.10,
+                        "pricePEN": 1370.00
+                    }
+                ]
+            },
+            {
+                "title": "Windows 10 Pro Retail",
+                "options": [
+                    {
+                        "name": "3 Unidades",
+                        "priceUSD": 93.10,
+                        "pricePEN": 321.00
+                    },
+                    {
+                        "name": "5 Unidades",
+                        "priceUSD": 155.10,
+                        "pricePEN": 535.00
+                    },
+                    {
+                        "name": "10 Unidades",
+                        "priceUSD": 310.20,
+                        "pricePEN": 1070.00
+                    }
+                ]
+            },
+            {
+                "title": "Windows 10 Pro OEM",
+                "options": [
+                    {
+                        "name": "3 Unidades",
+                        "priceUSD": 71.30,
+                        "pricePEN": 246.00
+                    },
+                    {
+                        "name": "5 Unidades",
+                        "priceUSD": 118.85,
+                        "pricePEN": 410.00
+                    },
+                    {
+                        "name": "10 Unidades",
+                        "priceUSD": 234.80,
+                        "pricePEN": 810.00
+                    }
+                ]
+            }
+        ]
+    }
+]

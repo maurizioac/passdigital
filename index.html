@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Pass Digital - Venta de Licencias y Streaming</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Font Awesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="navbar-left">
+            <div class="brand-name">
+                <a href="index.html" style="text-decoration: none;">
+                    <h1>Pass Digital</h1>
+                </a>
+            </div>
+            <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        <div class="navbar-center">
+            <div class="search-bar">
+                <i class="fa-solid fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Buscar productos (ej. Netflix, Office)...">
+                <i class="fa-solid fa-times clear-search" id="clearSearchBtn" title="Limpiar búsqueda" style="display: none;"></i>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <div class="cart-icon" id="cartBtn" title="Carrito de compras">
+                <i class="fa-solid fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+            <div class="login-btn">
+                <button id="loginBtn" class="login-google">
+                    <i class="fa-brands fa-google"></i> 
+                    <span class="hide-mobile">Iniciar Sesión</span>
+                </button>
+                <div id="userMenu" class="user-menu" style="display: none;">
+                    <button id="profileBtn" class="profile-btn">
+                        <i class="fa-solid fa-user-circle"></i>
+                        <span class="hide-mobile">Mi Perfil</span>
+                        <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; margin-left: 0.3rem;"></i>
+                    </button>
+                    <div id="userDropdown" class="user-dropdown">
+                        <a href="#" id="openHistoryBtn"><i class="fa-solid fa-clock-rotate-left"></i> Historial de Compras</a>
+                        <a href="#" id="logoutBtn"><i class="fa-solid fa-sign-out-alt"></i> Cerrar Sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Products Grid -->
+        <section class="products-section">
+            <div class="product-grid" id="productGrid">
+                <!-- Cards renderizadas dinámicamente con JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Producto -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-content">
+            <button class="close-modal"><i class="fa-solid fa-times"></i></button>
+            <div id="modalBody">
+                <!-- Contenido dinámico (Perfil/Cuenta Completa o Individual) -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Selección de Moneda -->
+    <div class="modal-overlay" id="currencyModal">
+        <div class="modal-content modal-single" style="text-align: center; max-width: 400px; padding: 2rem;">
+            <button class="close-modal" id="closeCurrencyModal"><i class="fa-solid fa-times"></i></button>
+            <div class="modal-header" style="margin-bottom: 1.5rem;">
+                <h2 style="font-size: 1.4rem; color: #fff;"><i class="fa-solid fa-wallet" style="color: var(--primary); margin-right: 8px;"></i> Moneda de Pago</h2>
+                <p style="margin-top: 0.8rem; font-size: 0.95rem;">¿En qué moneda desea realizar el pago?</p>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <button class="checkout-btn" id="btnPayPEN" style="background: linear-gradient(135deg, #10b981, #059669);">
+                    Soles (PEN)
+                </button>
+                <button class="checkout-btn" id="btnPayUSD" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
+                    Dólares (USD/USDT)
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Barra lateral del Carrito -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2><i class="fa-solid fa-cart-shopping"></i> Tu Carrito</h2>
+            <button class="close-cart"><i class="fa-solid fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Items agregados se mostrarán aquí -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotalSum">$0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn"><i class="fa-solid fa-credit-card"></i> Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- Historial de Compras Modal -->
+    <div id="historyModal" class="modal-overlay">
+        <div class="modal-content history-modal-content">
+            <button class="close-modal" id="closeHistoryBtn">&times;</button>
+            <h2><i class="fa-solid fa-clock-rotate-left"></i> Historial de Compras</h2>
+            <div id="historyBody" class="history-body">
+                <!-- Se llenará con JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón flotante de WhatsApp -->
+    <a href="https://wa.me/+51943470201?text=Hola,%20necesito%20ayuda%20o%20tengo%20dudas%20sobre%20un%20producto%20de%20la%20tienda."
+        target="_blank" class="fab-help" title="¿Necesitas ayuda?">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="fab-tooltip">¿Necesitas ayuda?</span>
+    </a>
+
+    <!-- Scripts Propios -->
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
