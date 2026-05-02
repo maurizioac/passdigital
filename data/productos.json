@@ -341,7 +341,7 @@
         "name": "Licencias Windows",
         "type": "bundle",
         "icon": "fa-windows",
-        "desc": "Sistemas operativos originales de Microsoft. Actualizaciones vitalicias.",
+        "desc": "Sistemas operativos originales de Microsoft. Actualizaciones vitalicias. (Incluye con instalación de drivers en caso de haber formateado el equipo.)",
         "subitems": [
             {
                 "title": "Windows 11 Pro Retail",
