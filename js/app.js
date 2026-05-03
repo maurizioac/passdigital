@@ -243,17 +243,17 @@ function openModal(item) {
             if (!optionData) return '';
             // El PEN es fijo, el USD se calcula dinámicamente según la fluctuación
             const pPEN = optionData.pricePEN || (optionData.price * 3.8); // Respaldo si no hay pricePEN
-            const calculatedUSD = pPEN / currentExchangeRate;
+            const calculatedUSD = Math.ceil((pPEN / currentExchangeRate) * 10) / 10;
             const displayStr = `${pPEN.toFixed(2)} PEN / $${calculatedUSD.toFixed(2)} USD`;
             const desc = optionData.desc || item.desc || '';
             const inst = optionData.instructions || item.instructions || '';
             return `
                 <div class="${item.price !== undefined ? 'modal-option modal-single' : 'modal-option'}">
                     ${optionName ? `<h3>${optionName}</h3>` : ''}
-                    <p class="modal-option-desc" ${item.price !== undefined ? 'style="text-align:center;"' : ''}>${desc}</p>
-                    <div class="modal-instructions">
+                    ${desc ? `<p class="modal-option-desc" ${item.price !== undefined ? 'style="text-align:center;"' : ''}>${desc}</p>` : ''}
+                    ${inst ? `<div class="modal-instructions">
                         <strong>Indicaciones de uso:</strong><br> ${inst}
-                    </div>
+                    </div>` : ''}
                     <div class="modal-price-row">
                         <span class="modal-price" ${item.price !== undefined ? '' : 'style="font-size: 1.1rem;"'}>${displayStr}</span>
                         <button class="btn-add" onclick="addToCart('${item.name}${optionName ? ' - ' + optionName : ''}', ${calculatedUSD}, ${pPEN})">Agregar al carrito</button>
@@ -291,7 +291,7 @@ function openModal(item) {
             if (sub.options) {
                 sub.options.forEach((opt, optIndex) => {
                     const pPEN = opt.pricePEN || (opt.priceUSD * 3.8) || 0;
-                    const calculatedUSD = pPEN / currentExchangeRate;
+                    const calculatedUSD = Math.ceil((pPEN / currentExchangeRate) * 10) / 10;
                     optionsHtml += `
                         <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 0.8rem 1rem; border-radius: 8px; margin-bottom: 0.5rem; border: 1px solid var(--border-color);">
                             <div>
@@ -336,7 +336,7 @@ function closeModal() {
 window.addToCart = function (name, priceUSD, pricePEN) {
     // Ya recibimos el pricePEN base y el priceUSD dinámico desde openModal
     const finalPEN = pricePEN || (priceUSD * currentExchangeRate); 
-    const finalUSD = priceUSD || (pricePEN / currentExchangeRate);
+    const finalUSD = priceUSD || (Math.ceil((pricePEN / currentExchangeRate) * 10) / 10);
 
     cart.push({ id: Date.now() + Math.random(), name, priceUSD: finalUSD, pricePEN: finalPEN });
     updateCartUI();
