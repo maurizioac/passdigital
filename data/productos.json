@@ -270,7 +270,7 @@
         "type": "single",
         "icon": "fa-paintbrush",
         "title": "Activación mediante \"Licencia KEY\". Duración: 1 Año",
-        "subtext": "APLICA PARA CUALQUIER CUENTAS. NO HAY DEVOLUCIÓN. PREFERIBLE USARLO EN PC",
+        "subtext": "APLICA PARA CUALQUIER CUENTA. NO HAY DEVOLUCIÓN. PREFERIBLE USARLO EN PC",
         "price": 11.60,
         "pricePEN": 40.00,
         "priceDisplay": "40 PEN / 11.60 USD"
@@ -281,7 +281,7 @@
         "type": "single",
         "icon": "fa-edit",
         "title": "Activación mediante \"Licencia KEY\". Duración: 1 Mes",
-        "subtext": "APLICA PARA CUALQUIER CUENTAS. NO HAY DEVOLUCIÓN.",
+        "subtext": "APLICA PARA CUALQUIER CUENTA. NO HAY DEVOLUCIÓN.",
         "price": 17.40,
         "pricePEN": 40.00,
         "priceDisplay": "40 PEN / 17.40 USD"
