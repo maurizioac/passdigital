@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayorista - Pass Digital</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background: #0f1115; color: #f8fafc; min-height: 100vh; }
+
+        .mayorista-hero {
+            background: linear-gradient(135deg, #0f1115 0%, #1a1d2e 50%, #0f1115 100%);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            padding: 2.5rem 2rem 2rem;
+            text-align: center;
+        }
+        .mayorista-hero h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .mayorista-hero h1 span { color: var(--primary); }
+        .mayorista-hero p { color: var(--text-muted); font-size: 0.95rem; }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: var(--text-muted); font-size: 0.9rem; text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;
+            padding: 0.4rem 0.9rem; margin-bottom: 1.5rem;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .back-btn:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
+
+        .mayorista-main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+        /* Brand section */
+        .brand-section { margin-bottom: 2.5rem; }
+        .brand-header {
+            display: flex; align-items: center; gap: 0.8rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.7rem;
+            border-bottom: 2px solid rgba(255,255,255,0.07);
+        }
+        .brand-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; font-weight: 700; flex-shrink: 0;
+        }
+        .brand-avast  { background: linear-gradient(135deg, #e63946, #c1121f); }
+        .brand-avg    { background: linear-gradient(135deg, #0077b6, #023e8a); }
+        .brand-mcafee { background: linear-gradient(135deg, #e76f51, #d62828); }
+        .brand-noping { background: linear-gradient(135deg, #2a9d8f, #264653); }
+        .brand-windows{ background: linear-gradient(135deg, #0078d4, #004578); }
+
+        .brand-header h2 { font-size: 1.3rem; font-weight: 700; margin: 0; }
+        .brand-header .brand-sub { font-size: 0.8rem; color: #94a3b8; margin-top: 2px; }
+
+        /* Product card */
+        .product-row {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 14px;
+            padding: 1.2rem 1.4rem;
+            margin-bottom: 0.8rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .product-row:hover { background: rgba(255,255,255,0.055); border-color: rgba(255,255,255,0.13); }
+
+        .product-row-title {
+            font-size: 0.95rem; font-weight: 600; margin-bottom: 1rem; color: #fff;
+        }
+
+        .range-badges {
+            display: flex; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 1rem;
+        }
+        .range-badge {
+            flex: 1; min-width: 160px;
+            background: rgba(255,255,255,0.09);
+            border: 1px solid rgba(99,102,241,0.3);
+            border-radius: 10px; padding: 0.7rem 1rem;
+        }
+        .range-badge .range-label {
+            font-size: 0.75rem; color: #cbd5e1; margin-bottom: 0.25rem;
+        }
+        .range-badge .range-price {
+            font-size: 1rem; font-weight: 700; color: var(--primary);
+        }
+        .range-badge .range-usd {
+            font-size: 0.75rem; color: #94a3b8; margin-top: 1px;
+        }
+
+        /* Input + total row */
+        .calc-row {
+            display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap;
+        }
+        .qty-wrap { display: flex; flex-direction: column; flex: 1; min-width: 120px; }
+        .qty-wrap label { font-size: 0.75rem; color: #cbd5e1; margin-bottom: 0.3rem; }
+        .qty-input {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px; padding: 0.5rem 0.8rem;
+            color: #fff; font-size: 0.95rem; outline: none;
+            transition: border-color 0.2s;
+            width: 100%;
+        }
+        .qty-input:focus { border-color: var(--primary); }
+        .qty-input::-webkit-inner-spin-button { opacity: 0.5; }
+
+        .total-display {
+            flex: 2; min-width: 160px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 0.5rem 0.9rem;
+            min-height: 42px;
+            display: flex; align-items: center;
+            font-size: 0.85rem; color: #94a3b8;
+        }
+        .add-btn {
+            display: none;
+            background: var(--primary);
+            color: #fff;
+            border: none; border-radius: 8px;
+            padding: 0.55rem 1.1rem;
+            font-size: 0.88rem; font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+            white-space: nowrap;
+        }
+        .add-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+        /* Info banner */
+        .info-banner {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px; padding: 1rem 1.3rem;
+            display: flex; align-items: flex-start; gap: 0.8rem;
+            margin-bottom: 2rem; font-size: 0.88rem; color: #cbd5e1;
+        }
+        .info-banner i { color: var(--primary); margin-top: 2px; flex-shrink: 0; }
+
+        /* Cart floating button */
+        .cart-float {
+            position: fixed; bottom: 1.5rem; right: 1.5rem;
+            background: var(--primary); color: #fff;
+            border: none; border-radius: 50px;
+            padding: 0.8rem 1.4rem;
+            font-size: 0.95rem; font-weight: 600;
+            cursor: pointer; display: none; align-items: center; gap: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 100; text-decoration: none;
+        }
+        .cart-float:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.5); }
+        .cart-float .cf-count {
+            background: #fff; color: var(--primary);
+            border-radius: 50%; width: 22px; height: 22px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.78rem; font-weight: 700;
+        }
+
+        @media (max-width: 600px) {
+            .mayorista-hero h1 { font-size: 1.6rem; }
+            .range-badges { flex-direction: column; }
+            .calc-row { flex-direction: column; align-items: stretch; }
+        }
+    </style>
+    <script>
+        if (localStorage.getItem('appTheme') === 'light') {
+            document.documentElement.classList.add('light-mode');
+        }
+    </script>
+</head>
+<body>
+
+<div class="mayorista-hero">
+    <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="back_to_catalog">Volver al catálogo</span></a>
+    <h1><i class="fa-solid fa-boxes-stacking" style="margin-right:0.5rem;"></i><span data-i18n="mw_hero_precios">Precios</span> <span data-i18n="mw_hero_mayorista">Mayorista</span></h1>
+    <p data-i18n="mw_hero_sub">Compra por volumen y obtén precios especiales · Mínimo 10 unidades por producto</p>
+</div>
+
+<div class="mayorista-main">
+
+    <div class="info-banner">
+        <i class="fa-solid fa-circle-info"></i>
+        <span data-i18n="mw_info_banner">Ingresa la cantidad que necesitas en cada producto. El precio total se calcula automáticamente según el rango. Para coordinar el pedido, escríbenos directamente.</span>
+    </div>
+
+    <div id="mayorista-content">
+    <div class="brand-section">
+        <div class="brand-header">
+            <div class="brand-icon brand-avast">AV</div>
+            <div>
+                <h2>AVAST</h2>
+                <div class="brand-sub" data-i18n="mw_sub_avast">Seguridad antivirus premium</div>
+            </div>
+        </div>
+        <div class="product-row">
+            <div class="product-row-title" data-i18n="mw_avast_ps_1">Avast Premium Security (1 Año - 1 Dispositivo)</div>
+            <div class="range-badges">
+                <div class="range-badge">
+                    <div class="range-label" data-i18n="range_10_100">10–100 unidades</div>
+                    <div class="range-price">22.90 PEN</div>
+                    <div class="range-usd">$6.84 USD <span data-i18n="per_unit">c/u</span></div>
+                </div>
+            </div>
+            <div class="calc-row">
+                <div class="qty-wrap">
+                    <label data-i18n="qty_label">Cantidad de unidades</label>
+                    <input type="number" id="qty_sub_0" class="qty-input" min="1" placeholder="Ej: 25" data-i18n-placeholder="qty_placeholder" oninput="calcMayorista('sub_0', 10, 100, 22.90, 6.84)">
+                </div>
+                <div class="total-display" id="total_sub_0"><span data-i18n="enter_quantity">Ingresa una cantidad</span></div>
+                <button class="add-btn" id="btn_sub_0" onclick="addToCart(this)" data-name="Avast Premium Security (1 Año - 1 Dispositivo) (Mayorista)"><i class="fa-solid fa-cart-plus"></i> <span data-i18n="add_btn">Agregar</span></button>
+            </div>
+        </div>
+        
+        <div class="product-row">
+            <div class="product-row-title" data-i18n="mw_avast_ps_3">Avast Premium Security (1 Año - 3 Dispositivos)</div>
+            <div class="range-badges">
+                <div class="range-badge">
+                    <div class="range-label" data-i18n="range_10_100">10–100 unidades</div>
+                    <div class="range-price">57.90 PEN</div>
+                    <div class="range-usd">$17.28 USD <span data-i18n="per_unit">c/u</span></div>
+                </div>
+            </div>
+            <div class="calc-row">
+                <div class="qty-wrap">
+                    <label data-i18n="qty_label">Cantidad de unidades</label>
+                    <input type="number" id="qty_sub_1" class="qty-input" min="1" placeholder="Ej: 25" data-i18n-placeholder="qty_placeholder" oninput="calcMayorista('sub_1', 10, 100, 57.90, 17.28)">
+                </div>
+                <div class="total-display" id="total_sub_1"><span data-i18n="enter_quantity">Ingresa una cantidad</span></div>
+                <button class="add-btn" id="btn_sub_1" onclick="addToCart(this)" data-name="Avast Premium Security (1 Año - 3 Dispositivos) (Mayorista)"><i class="fa-solid fa-cart-plus"></i> <span data-i18n="add_btn">Agregar</span></button>
+            </div>
+        </div>
+
+        <div class="product-row">
+            <div class="product-row-title" data-i18n="mw_avast_ps_10">Avast Premium Security (1 Año - 10 Dispositivos)</div>
+            <div class="range-badges">
+                <div class="range-badge">
+                    <div class="range-label" data-i18n="range_10_100">10–100 unidades</div>
+                    <div class="range-price">92.90 PEN</div>
+                    <div class="range-usd">$27.73 USD <span data-i18n="per_unit">c/u</span></div>
+                </div>
+            </div>
+            <div class="calc-row">
+                <div class="qty-wrap">
+                    <label data-i18n="qty_label">Cantidad de unidades</label>
+                    <input type="number" id="qty_sub_2" class="qty-input" min="1" placeholder="Ej: 25" data-i18n-placeholder="qty_placeholder" oninput="calcMayorista('sub_2', 10, 100, 92.90, 27.73)">
+                </div>
+                <div class="total-display" id="total_sub_2"><span data-i18n="enter_quantity">Ingresa una cantidad</span></div>
+                <button class="add-btn" id="btn_sub_2" onclick="addToCart(this)" data-name="Avast Premium Security (1 Año - 10 Dispositivos) (Mayorista)"><i class="fa-solid fa-cart-plus"></i> <span data-i18n="add_btn">Agregar</span></button>
+            </div>
+        </div>
+        
+        <div class="product-row">
+            <div class="product-row-title" data-i18n="mw_avast_ult_1">Avast Ultimate (1 Año - 1 Dispositivo)</div>
+            <div class="range-badges">
+                <div class="range-badge">
+                    <div class="range-label" data-i18n="range_10_100">10–100 unidades</div>
+                    <div class="range-price">102.90 PEN</div>
+                    <div class="range-usd">$30.72 USD <span data-i18n="per_unit">c/u</span></div>
+                </div>
+            </div>
+            <div class="calc-row">
+                <div class="qty-wrap">
+                    <label data-i18n="qty_label">Cantidad de unidades</label>
+                    <input type="number" id="qty_sub_3" class="qty-input" min="1" placeholder="Ej: 25" data-i18n-placeholder="qty_placeholder" oninput="calcMayorista('sub_3', 10, 100, 102.90, 30.72)">
+                </div>
+                <div class="total-display" id="total_sub_3"><span data-i18n="enter_quantity">Ingresa una cantidad</span></div>
+                <button class="add-btn" id="btn_sub_3" onclick="addToCart(this)" data-name="Avast Ultimate (1 Año - 1 Dispositivo) (Mayorista)"><i class="fa-solid fa-cart-plus"></i> <span data-i18n="add_btn">Agregar</span></button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="brand-section">
+        <div class="brand-header">
+            <div class="brand-icon brand-avg">AVG</div>
+            <div>
+                <h2>AVG</h2>
+                <div class="brand-sub" data-i18n="mw_sub_avg">Protección internet</div>
+            </div>
+        </div>
+        <div class="product-row">
+            <div class="product-row-title" data-i18n="mw_avg_1">AVG Internet Security (1 Año - 1 Dispositivo)</div>
+            <div class="range-badges">
+                <div class="range-badge">
+                    <div class="range-label" data-i18n="range_10_100">10–100 unidades</div>
+                    <div class="range-price">29.90 PEN</div>
+                    <div class="range-usd">$8.93 USD <span data-i18n="per_unit">c/u</span></div>
+                </div>
+            </div>
+            <div class="calc-row">
+                <div class="qty-wrap">
+                    <label data-i18n="qty_label">Cantidad de unidades</label>
+                    <input type="number" id="qty_sub_4" class="qty-input" min="1" placeholder="Ej: 25" data-i18n-placeholder="qty_placeholder" oninput="calcMayorista('sub_4', 10, 100, 29.90, 8.93)">
+                </div>
+                <div class="total-display" id="total_sub_4"><span data-i18n="enter_quantity">Ingresa una cantidad</span></div>
+                <button class="add-btn" id="btn_sub_4" onclick="addToCart(this)" data-name="AVG Internet Security (1 Año - 1 Dispositivo) (Mayorista)"><i class="fa-solid fa-cart-plus"></i> <span data-i18n="add_btn">Agregar</span></button>
+            </div>
+        </div>
+        
+        <div class="product-row">
+            <div class="product-row-title" data-i18n="mw_avg_10">AVG Internet Security (1 Año - 10 Dispositivos)</div>
+            <div class="range-badges">
+                <div class="range-badge">
+                    <div class="range-label" data-i18n="range_10_100">10–100 unidades</div>
+                    <div class="range-price">62.90 PEN</div>
+                    <div class="range-usd">$18.78 USD <span data-i18n="per_unit">c/u</span></div>
+                </div>
+            </div>
+            <div class="calc-row">
+                <div class="qty-wrap">
+                    <label data-i18n="qty_label">Cantidad de unidades</label>
+                    <input type="number" id="qty_sub_5" class="qty-input" min="1" placeholder="Ej: 25" data-i18n-placeholder="qty_placeholder" oninput="calcMayorista('sub_5', 10, 100, 62.90, 18.78)">
+                </div>
+                <div class="total-display" id="total_sub_5"><span data-i18n="enter_quantity">Ingresa una cantidad</span></div>
+                <button class="add-btn" id="btn_sub_5" onclick="addToCart(this)" data-name="AVG Internet Security (1 Año - 10 Dispositivos) (Mayorista)"><i class="fa-solid fa-cart-plus"></i> <span data-i18n="add_btn">Agregar</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="brand-section">
+        <div class="brand-header">
+            <div class="brand-icon brand-mcafee">MC</div>
+            <div>
+                <h2>McAfee</h2>
+                <div class="brand-sub" data-i18n="mw_sub_mcafee">Antivirus y seguridad</div>
+            </div>
+        </div>
+        <div class="product-row">
+            <div class="product-row-title" data-i18n="mw_mcafee_1">McAfee Premium Basic (1 Año - 1 Dispositivo)</div>
+            <div class="range-badges">
+                <div class="range-badge">
+                    <div class="range-label" data-i18n="range_10_100">10–100 unidades</div>
+                    <div class="range-price">28.90 PEN</div>
+                    <div class="range-usd">$8.63 USD <span data-i18n="per_unit">c/u</span></div>
+                </div>
+            </div>
+            <div class="calc-row">
+                <div class="qty-wrap">
+                    <label data-i18n="qty_label">Cantidad de unidades</label>
+                    <input type="number" id="qty_sub_6" class="qty-input" min="1" placeholder="Ej: 25" data-i18n-placeholder="qty_placeholder" oninput="calcMayorista('sub_6', 10, 100, 28.90, 8.63)">
+                </div>
+                <div class="total-display" id="total_sub_6"><span data-i18n="enter_quantity">Ingresa una cantidad</span></div>
+                <button class="add-btn" id="btn_sub_6" onclick="addToCart(this)" data-name="McAfee Premium Basic (1 Año - 1 Dispositivo) (Mayorista)"><i class="fa-solid fa-cart-plus"></i> <span data-i18n="add_btn">Agregar</span></button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="brand-section">
+    <div class="brand-header">
+        <div class="brand-icon brand-windows">W</div>
+        <div>
+            <h2>WINDOWS</h2>
+            <div class="brand-sub" data-i18n="mw_sub_windows">Sistemas operativos Microsoft</div>
+        </div>
+    </div>
+    
+    <!-- Windows 11 Pro Retail -->
+    <div class="product-row">
+        <div class="product-row-title">Windows 11 Pro Retail</div>
+        <div class="range-badges">
+            <div class="range-badge">
+                <div class="range-label" data-i18n="range_10_100">10–100 unidades</div>
+                <div class="range-price">29.90 PEN</div>
+                <div class="range-usd">$8.93 USD <span data-i18n="per_unit">c/u</span></div>
+            </div>
+        </div>
+        <div class="calc-row">
+            <div class="qty-wrap">
+                <label data-i18n="qty_label">Cantidad de unidades</label>
+                <input type="number" id="qty_win11p" class="qty-input" min="1" placeholder="Ej: 25" data-i18n-placeholder="qty_placeholder" oninput="calcMayorista('win11p', 10, 100, 29.90, 8.93)">
+            </div>
+            <div class="total-display" id="total_win11p"><span data-i18n="enter_quantity">Ingresa una cantidad</span></div>
+            <button class="add-btn" id="btn_win11p" onclick="addToCart(this)" data-name="Windows 11 Pro Retail (Mayorista)"><i class="fa-solid fa-cart-plus"></i> <span data-i18n="add_btn">Agregar</span></button>
+        </div>
+    </div>
+
+    <div class="product-row">
+        <div class="product-row-title">Windows 11 Home OEM</div>
+        <div class="range-badges">
+            <div class="range-badge">
+                <div class="range-label" data-i18n="range_10_100">10–100 unidades</div>
+                <div class="range-price">27.90 PEN</div>
+                <div class="range-usd">$8.33 USD <span data-i18n="per_unit">c/u</span></div>
+            </div>
+        </div>
+        <div class="calc-row">
+            <div class="qty-wrap">
+                <label data-i18n="qty_label">Cantidad de unidades</label>
+                <input type="number" id="qty_win11h" class="qty-input" min="1" placeholder="Ej: 25" data-i18n-placeholder="qty_placeholder" oninput="calcMayorista('win11h', 10, 100, 27.90, 8.33)">
+            </div>
+            <div class="total-display" id="total_win11h"><span data-i18n="enter_quantity">Ingresa una cantidad</span></div>
+            <button class="add-btn" id="btn_win11h" onclick="addToCart(this)" data-name="Windows 11 Home OEM (Mayorista)"><i class="fa-solid fa-cart-plus"></i> <span data-i18n="add_btn">Agregar</span></button>
+        </div>
+    </div>
+
+    <div class="product-row">
+        <div class="product-row-title">Windows 10 Pro Retail</div>
+        <div class="range-badges">
+            <div class="range-badge">
+                <div class="range-label" data-i18n="range_10_100">10–100 unidades</div>
+                <div class="range-price">27.90 PEN</div>
+                <div class="range-usd">$8.33 USD <span data-i18n="per_unit">c/u</span></div>
+            </div>
+        </div>
+        <div class="calc-row">
+            <div class="qty-wrap">
+                <label data-i18n="qty_label">Cantidad de unidades</label>
+                <input type="number" id="qty_win10p" class="qty-input" min="1" placeholder="Ej: 25" data-i18n-placeholder="qty_placeholder" oninput="calcMayorista('win10p', 10, 100, 27.90, 8.33)">
+            </div>
+            <div class="total-display" id="total_win10p"><span data-i18n="enter_quantity">Ingresa una cantidad</span></div>
+            <button class="add-btn" id="btn_win10p" onclick="addToCart(this)" data-name="Windows 10 Pro Retail (Mayorista)"><i class="fa-solid fa-cart-plus"></i> <span data-i18n="add_btn">Agregar</span></button>
+        </div>
+    </div>
+
+    <div class="product-row">
+        <div class="product-row-title">Windows 10 Home OEM</div>
+        <div class="range-badges">
+            <div class="range-badge">
+                <div class="range-label" data-i18n="range_10_100">10–100 unidades</div>
+                <div class="range-price">25.90 PEN</div>
+                <div class="range-usd">$7.73 USD <span data-i18n="per_unit">c/u</span></div>
+            </div>
+        </div>
+        <div class="calc-row">
+            <div class="qty-wrap">
+                <label data-i18n="qty_label">Cantidad de unidades</label>
+                <input type="number" id="qty_win10h" class="qty-input" min="1" placeholder="Ej: 25" data-i18n-placeholder="qty_placeholder" oninput="calcMayorista('win10h', 10, 100, 25.90, 7.73)">
+            </div>
+            <div class="total-display" id="total_win10h"><span data-i18n="enter_quantity">Ingresa una cantidad</span></div>
+            <button class="add-btn" id="btn_win10h" onclick="addToCart(this)" data-name="Windows 10 Home OEM (Mayorista)"><i class="fa-solid fa-cart-plus"></i> <span data-i18n="add_btn">Agregar</span></button>
+        </div>
+    </div>
+</div>
+    
+    <div class="brand-section">
+        <div class="brand-header">
+            <div class="brand-icon brand-noping">NP</div>
+            <div>
+                <h2>NOPING</h2>
+                <div class="brand-sub" data-i18n="mw_sub_noping">Reducción de ping para gaming</div>
+            </div>
+        </div>
+        <div class="product-row">
+            <div class="product-row-title" data-i18n="mw_noping">No Ping (1 Dispositivo - 30 días)</div>
+            <div class="range-badges">
+                <div class="range-badge">
+                    <div class="range-label" data-i18n="range_10_100">10–100 unidades</div>
+                    <div class="range-price">32.90 PEN</div>
+                    <div class="range-usd">$9.82 USD <span data-i18n="per_unit">c/u</span></div>
+                </div>
+            </div>
+            <div class="calc-row">
+                <div class="qty-wrap">
+                    <label data-i18n="qty_label">Cantidad de unidades</label>
+                    <input type="number" id="qty_sub_9" class="qty-input" min="1" placeholder="Ej: 25" data-i18n-placeholder="qty_placeholder" oninput="calcMayorista('sub_9', 10, 100, 32.90, 9.82)">
+                </div>
+                <div class="total-display" id="total_sub_9"><span data-i18n="enter_quantity">Ingresa una cantidad</span></div>
+                <button class="add-btn" id="btn_sub_9" onclick="addToCart(this)" data-name="No Ping (1 Dispositivo - 30 días) (Mayorista)"><i class="fa-solid fa-cart-plus"></i> <span data-i18n="add_btn">Agregar</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script>
+window.calcMayorista = function(subId, min, max, unitPEN, unitUSD) {
+    const qtyInput = document.getElementById('qty_' + subId);
+    const totalBox = document.getElementById('total_' + subId);
+    const addBtn   = document.getElementById('btn_' + subId);
+    const qty = parseInt(qtyInput.value, 10);
+
+    if (!qty || qty < 1) {
+        totalBox.innerHTML = `<span data-i18n="enter_quantity">${window.translate('enter_quantity')}</span>`;
+        addBtn.style.display = 'none';
+        return;
+    }
+
+    if (qty < min || qty > max) {
+        const rangeMsg = window.translate('enter_range_tpl').replace('%min%', min).replace('%max%', max);
+        totalBox.innerHTML = `<span style="color:#f87171;">${rangeMsg}</span>`;
+        addBtn.style.display = 'none';
+        return;
+    }
+
+    const totalPEN = (unitPEN * qty).toFixed(2);
+    const totalUSD = (unitUSD * qty).toFixed(2);
+    const unitsWord = window.translate('units_word');
+    const perUnit = window.translate('per_unit');
+
+    totalBox.innerHTML = `
+        <div>
+            <span style="font-size:0.73rem;color:var(--text-muted);display:block;margin-bottom:2px;">${qty} ${unitsWord} × ${unitPEN.toFixed(2)} PEN / $${unitUSD.toFixed(2)} USD ${perUnit}</span>
+            <span style="font-weight:700;color:var(--primary);">Total: ${totalPEN} PEN / $${totalUSD} USD</span>
+        </div>
+    `;
+    addBtn.style.display = 'inline-flex';
+    
+    addBtn.setAttribute('data-price-pen', totalPEN);
+    addBtn.setAttribute('data-price-usd', totalUSD);
+    
+    const baseName = addBtn.getAttribute('data-name').split(' (x')[0]; 
+    addBtn.setAttribute('data-name', `${baseName} (x${qty})`);
+};
+
+window.onLanguageChanged = function () {
+    document.querySelectorAll('.qty-input').forEach(input => {
+        if (input.value) {
+            input.dispatchEvent(new Event('input'));
+        } else {
+            const totalBox = document.getElementById('total_' + input.id.replace('qty_', ''));
+            if (totalBox) totalBox.innerHTML = `<span data-i18n="enter_quantity">${window.translate('enter_quantity')}</span>`;
+        }
+    });
+};
+
+</script>
+<script>
+window.PAGE_I18N = {
+    es: {
+        page_title: 'Mayorista - Pass Digital',
+        mw_hero_precios: 'Precios',
+        mw_hero_mayorista: 'Mayorista',
+        mw_hero_sub: 'Compra por volumen y obtén precios especiales · Mínimo 10 unidades por producto',
+        mw_info_banner: 'Ingresa la cantidad que necesitas en cada producto. El precio total se calcula automáticamente según el rango. Para coordinar el pedido, escríbenos directamente.',
+        mw_avast_ps_1: 'Avast Premium Security (1 Año - 1 Dispositivo)',
+        mw_avast_ps_3: 'Avast Premium Security (1 Año - 3 Dispositivos)',
+        mw_avast_ps_10: 'Avast Premium Security (1 Año - 10 Dispositivos)',
+        mw_avast_ult_1: 'Avast Ultimate (1 Año - 1 Dispositivo)',
+        mw_avg_1: 'AVG Internet Security (1 Año - 1 Dispositivo)',
+        mw_avg_10: 'AVG Internet Security (1 Año - 10 Dispositivos)',
+        mw_mcafee_1: 'McAfee Premium Basic (1 Año - 1 Dispositivo)',
+        mw_noping: 'No Ping (1 Dispositivo - 30 días)',
+        mw_sub_avast: 'Seguridad antivirus premium',
+        mw_sub_avg: 'Protección internet',
+        mw_sub_mcafee: 'Antivirus y seguridad',
+        mw_sub_windows: 'Sistemas operativos Microsoft',
+        mw_sub_noping: 'Reducción de ping para gaming'
+    },
+    en: {
+        page_title: 'Wholesale - Pass Digital',
+        mw_hero_precios: 'Wholesale',
+        mw_hero_mayorista: 'Pricing',
+        mw_hero_sub: 'Buy in bulk and get special prices · Minimum 10 units per product',
+        mw_info_banner: 'Enter the quantity you need for each product. The total price is calculated automatically based on the range. To coordinate your order, message us directly.',
+        mw_avast_ps_1: 'Avast Premium Security (1 Year - 1 Device)',
+        mw_avast_ps_3: 'Avast Premium Security (1 Year - 3 Devices)',
+        mw_avast_ps_10: 'Avast Premium Security (1 Year - 10 Devices)',
+        mw_avast_ult_1: 'Avast Ultimate (1 Year - 1 Device)',
+        mw_avg_1: 'AVG Internet Security (1 Year - 1 Device)',
+        mw_avg_10: 'AVG Internet Security (1 Year - 10 Devices)',
+        mw_mcafee_1: 'McAfee Premium Basic (1 Year - 1 Device)',
+        mw_noping: 'No Ping (1 Device - 30 days)',
+        mw_sub_avast: 'Premium antivirus security',
+        mw_sub_avg: 'Internet protection',
+        mw_sub_mcafee: 'Antivirus and security',
+        mw_sub_windows: 'Microsoft operating systems',
+        mw_sub_noping: 'Ping reduction for gaming'
+    }
+};
+</script>
+<script src="js/i18n.js"></script>
+<script src="js/config.js"></script>
+<script src="js/shared_cart.js"></script>
+<a href="https://wa.me/+51943470201?text=Hola,%20necesito%20ayuda%20o%20tengo%20dudas%20sobre%20un%20producto%20de%20la%20tienda."
+    target="_blank" class="fab-help fab-help-whatsapp" title="¿Necesitas ayuda?" data-i18n-title="help_tooltip">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="fab-tooltip" data-i18n="help_tooltip">¿Necesitas ayuda?</span>
+</a>
+<a href="https://t.me/" data-tg-message="Hola, tengo una consulta sobre los servicios de streaming/licencias."
+    target="_blank" rel="noopener" class="fab-help fab-help-telegram" title="Escríbenos por Telegram" data-i18n-title="help_tooltip_telegram">
+    <i class="fa-brands fa-telegram"></i>
+    <span class="fab-tooltip" data-i18n="help_tooltip_telegram">Escríbenos por Telegram</span>
+</a>
+<button id="themeToggleBtn" class="fab-theme" title="Invertir colores" data-i18n-title="theme_tooltip">
+    <i class="fa-solid fa-circle-half-stroke"></i>
+</button>
+
+
+    <!-- Footer del sitio -->
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <div class="site-footer__brand">
+                <div class="site-footer__logo">💎</div>
+                <span class="site-footer__name">Pass Digital</span>
+                <span class="site-footer__year">2026</span>
+                <div class="site-footer__contact-row">
+                    <span class="site-footer__label" data-i18n="footer_email_label">Correo:</span>
+                    <a href="mailto:ventasenlineavel@gmail.com" class="site-footer__email">ventasenlineavel@gmail.com</a>
+                    <a href="https://mail.google.com/mail/?view=cm&to=ventasenlineavel@gmail.com" target="_blank" class="site-footer__btn" data-i18n="footer_contact_btn">Contactar</a>
+                </div>
+                <div class="site-footer__contact-row">
+                    <span class="site-footer__label">WhatsApp:</span>
+                    <a href="https://wa.me/51943470201" target="_blank" class="site-footer__email">+51 943 470 201</a>
+                    <a href="https://wa.me/51943470201" target="_blank" class="site-footer__btn" data-i18n="footer_contact_btn">Contactar</a>
+                </div>
+            </div>
+            <div class="site-footer__divider"></div>
+            <div class="site-footer__hours">
+                <span class="site-footer__hours-title" data-i18n="footer_hours_title">🕐 Horarios</span>
+                <div class="site-footer__hours-row">
+                    <span class="site-footer__hours-day" data-i18n="footer_day_mf">Lunes - Viernes:</span>
+                    <span class="site-footer__hours-time">09:00 - 18:00</span>
+                </div>
+                <div class="site-footer__hours-row">
+                    <span class="site-footer__hours-day" data-i18n="footer_day_sat">Sábado:</span>
+                    <span class="site-footer__hours-time">10:00 - 17:00</span>
+                </div>
+                <div class="site-footer__hours-row">
+                    <span class="site-footer__hours-day" data-i18n="footer_day_sun">Domingo:</span>
+                    <span class="site-footer__hours-time site-footer__hours-closed" data-i18n="footer_closed">Cerrado</span>
+                </div>
+                <p class="site-footer__hours-note" data-i18n="footer_hours_note">Si no contestamos de manera inmediata, estamos ocupados/estudiando en la universidad. ¡Ténganos paciencia!</p>
+            </div>
+        </div>
+    <div class="site-footer__notice">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p data-i18n="footer_policy_notice">Si no respondemos de inmediato, es porque estamos ocupados o en clases de la universidad: les pedimos un poco de paciencia. Ante mensajes o llamadas insistentes y repetidas se enviará una primera advertencia; si la insistencia continúa, el acceso será bloqueado en todas las plataformas alquiladas y los pagos adelantados no serán reembolsados.</p>
+    </div>
+    </footer>
+</body>
+</html>

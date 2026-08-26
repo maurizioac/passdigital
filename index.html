@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Pass Digital - Venta de Licencias y Streaming</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        if (localStorage.getItem('appTheme') === 'light') {
+            document.documentElement.classList.add('light-mode');
+        }
+    </script>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="navbar-left">
+            <div class="brand-name">
+                <a href="index.html" style="text-decoration: none;">
+                    <h1>Pass Digital</h1>
+                </a>
+            </div>
+            <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+        </div>
+        <div class="navbar-center">
+            <div class="search-bar">
+                <i class="fa-solid fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Buscar productos (ej. Netflix, Office)..."
+                    data-i18n-placeholder="search_placeholder">
+                <i class="fa-solid fa-times clear-search" id="clearSearchBtn" title="Limpiar búsqueda"
+                    data-i18n-title="clear_search" style="display: none;"></i>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <div class="lang-toggle" style="margin-right: 15px;">
+                <button id="langToggleBtn" class="profile-btn"
+                    style="background: none; border: none; color: #e2e8f0; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; padding: 0.5rem;">
+                    <i class="fa-solid fa-globe"></i> <span id="langLabel">EN</span>
+                </button>
+            </div>
+            <div class="cart-icon" id="cartBtn" title="Carrito de compras">
+                <i class="fa-solid fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+            <div class="login-btn">
+                <button id="loginBtn" class="login-google">
+                    <i class="fa-brands fa-google"></i>
+                    <span class="hide-mobile" data-i18n="login_btn">Iniciar Sesión</span>
+                </button>
+                <div id="userMenu" class="user-menu" style="display: none;">
+                    <button id="profileBtn" class="profile-btn">
+                        <i class="fa-solid fa-user-circle"></i>
+                        <span class="hide-mobile" data-i18n="profile_btn">Mi Perfil</span>
+                        <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem; margin-left: 0.3rem;"></i>
+                    </button>
+                    <div id="userDropdown" class="user-dropdown">
+                        <a href="#" id="openHistoryBtn"><i class="fa-solid fa-clock-rotate-left"></i> <span
+                                data-i18n="history_btn">Historial de Compras</span></a>
+                        <a href="#" id="logoutBtn"><i class="fa-solid fa-sign-out-alt"></i> <span
+                                data-i18n="logout_btn">Cerrar Sesión</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <canvas id="hero-circuit"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.6;"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span data-i18n="hero_title_part1">Tu Pase al Mundo</span>
+                <span class="highlight" data-i18n="hero_title_part2">Digital</span>
+            </h1>
+            <p class="hero-desc" data-i18n="hero_desc">Disfruta tus series, películas, música y licencias (IA's,
+                antivirus, noping, windows, etc) sin complicaciones y al mejor precio. </p>
+        </div>
+
+        <div class="hero-carousel-container">
+            <div class="hero-carousel">
+                <a href="disney.html" class="carousel-item" data-id="disney">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    Disney+
+                </a>
+
+                <a href="prime.html" class="carousel-item" data-id="prime">
+                    <i class="fa-solid fa-video"></i>
+                    Prime Video
+                </a>
+
+                <a href="hbo.html" class="carousel-item" data-id="hbo">
+                    <i class="fa-solid fa-tv"></i>
+                    HBO Max
+                </a>
+
+                <a href="paramount.html" class="carousel-item" data-id="paramount">
+                    <i class="fa-solid fa-mountain"></i>
+                    Paramount+
+                </a>
+
+                <a href="crunchyroll.html" class="carousel-item" data-id="crunchyroll">
+                  <i class="fa-solid fa-skull-crossbones"></i>
+                    Crunchyroll
+                </a>
+
+                <a href="vix.html" class="carousel-item" data-id="vix">
+                    <i class="fa-solid fa-film"></i>
+                    Vix
+                </a>
+
+                <a href="netflix.html" class="carousel-item" data-id="netflix">
+                    <i class="fa-solid fa-clapperboard"></i>
+                    Netflix
+                </a>
+
+                <a href="antivirus.html" class="carousel-item" data-id="antivirus">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    AVAST / AVG / McAfee
+                </a>
+
+                <a href="noping.html" class="carousel-item" data-id="noping">
+                    <i class="fa-solid fa-gamepad"></i>
+                    NoPing
+                </a>
+
+                <a href="windows.html" class="carousel-item" data-id="windows">
+                    <i class="fa-solid fa-windows"></i>
+                    Windows
+                </a>
+
+                <a href="mayorista.html" class="carousel-item" data-id="mayorista">
+                    <i class="fa-solid fa-boxes-stacking"></i>
+                    Mayorista
+                </a>
+
+<a href="disney.html" class="carousel-item" data-id="disney">
+    <i class="fa-solid fa-wand-magic-sparkles"></i>
+    Disney+
+</a>
+
+<a href="prime.html" class="carousel-item" data-id="prime">
+    <i class="fa-solid fa-video"></i>
+    Prime Video
+</a>
+
+<a href="hbo.html" class="carousel-item" data-id="hbo">
+    <i class="fa-solid fa-tv"></i>
+    HBO Max
+</a>
+
+<a href="paramount.html" class="carousel-item" data-id="paramount">
+    <i class="fa-solid fa-mountain"></i>
+    Paramount+
+</a>
+
+<a href="crunchyroll.html" class="carousel-item" data-id="crunchyroll">
+    <i class="fa-solid fa-skull-crossbones"></i>
+    Crunchyroll
+</a>
+
+<a href="vix.html" class="carousel-item" data-id="vix">
+    <i class="fa-solid fa-film"></i>
+    Vix
+</a>
+
+<a href="netflix.html" class="carousel-item" data-id="netflix">
+    <i class="fa-solid fa-clapperboard"></i>
+    Netflix
+</a>
+
+<a href="antivirus.html" class="carousel-item" data-id="antivirus">
+    <i class="fa-solid fa-shield-halved"></i>
+    AVAST / AVG / McAfee
+</a>
+
+<a href="noping.html" class="carousel-item" data-id="noping">
+    <i class="fa-solid fa-gamepad"></i>
+    NoPing
+</a>
+
+<a href="windows.html" class="carousel-item" data-id="windows">
+    <i class="fa-solid fa-windows"></i>
+    Windows
+</a>
+
+<a href="mayorista.html" class="carousel-item" data-id="mayorista">
+    <i class="fa-solid fa-boxes-stacking"></i>
+    Mayorista
+</a>
+        </div>
+    </section>
+    <main class="container">
+        <!-- Products Grid -->
+        <section class="products-section">
+            <div class="product-grid" id="productGrid">
+    <div class="product-card" onclick="window.location.href='hbo.html'">
+        <i class="fa-solid fa-tv"></i><h3>HBO</h3>
+    </div>
+    <div class="product-card" onclick="window.location.href='crunchyroll.html'">
+        <i class="fa-solid fa-skull-crossbones"></i><h3>Crunchyroll</h3>
+    </div>
+    <div class="product-card" onclick="window.location.href='disney.html'">
+        <i class="fa-solid fa-wand-magic-sparkles"></i><h3>Disney</h3>
+    </div>
+    <div class="product-card" onclick="window.location.href='paramount.html'">
+        <i class="fa-solid fa-mountain"></i><h3>Paramount</h3>
+    </div>
+    <div class="product-card" onclick="window.location.href='netflix.html'">
+        <i class="fa-solid fa-clapperboard"></i><h3>Netflix</h3>
+    </div>
+    <div class="product-card" onclick="window.location.href='prime.html'">
+        <i class="fa-solid fa-video"></i><h3>Prime Video</h3>
+    </div>
+    <div class="product-card" onclick="window.location.href='apple.html'">
+        <i class="fa-solid fa-play"></i><h3>Apple TV+</h3>
+    </div>
+    <div class="product-card" onclick="window.location.href='magistv.html'">
+        <i class="fa-solid fa-broadcast-tower"></i><h3>MagisTV / Xupertv</h3>
+    </div>
+    <div class="product-card" onclick="window.location.href='vix.html'">
+        <i class="fa-solid fa-film"></i><h3>Vix</h3>
+    </div>
+    <div class="product-card" onclick="window.location.href='antivirus.html'">
+        <i class="fa-solid fa-shield-halved"></i><h3 data-i18n="card_antivirus">Antivirus</h3>
+    </div>
+    <div class="product-card" onclick="window.location.href='noping.html'">
+        <i class="fa-solid fa-gamepad"></i><h3>No Ping</h3>
+    </div>
+    <div class="product-card" onclick="window.location.href='windows.html'">
+        <i class="fa-solid fa-windows"></i><h3 data-i18n="card_windows">Windows</h3>
+    </div>
+    <div class="product-card" onclick="window.location.href='combos.html'">
+        <i class="fa-solid fa-layer-group"></i><h3 data-i18n="card_combos">Combos (Antivirus-Windows-Office)</h3>
+    </div>
+    <div class="product-card" onclick="window.location.href='mayorista.html'">
+        <i class="fa-solid fa-boxes-stacked"></i><h3 data-i18n="card_mayorista">Mayorista</h3>
+    </div>
+</div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-content">
+            <button class="close-modal"><i class="fa-solid fa-times"></i></button>
+            <div id="modalBody">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Selección de Moneda -->
+    <div class="modal-overlay" id="currencyModal">
+        <div class="modal-content modal-single" style="text-align: center; max-width: 400px; padding: 2rem;">
+            <button class="close-modal" id="closeCurrencyModal"><i class="fa-solid fa-times"></i></button>
+            <div class="modal-header" style="margin-bottom: 1.5rem;">
+                <h2 style="font-size: 1.4rem; color: #fff;"><i class="fa-solid fa-wallet"
+                        style="color: var(--primary); margin-right: 8px;"></i> <span
+                        data-i18n="currency_modal_title">Moneda de Pago</span></h2>
+                <p style="margin-top: 0.8rem; font-size: 0.95rem;" data-i18n="currency_modal_desc">¿En qué moneda desea
+                    realizar el pago?</p>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <button class="checkout-btn" id="btnPayPEN"
+                    style="background: linear-gradient(135deg, #10b981, #059669);" data-i18n="currency_pen">
+                    Soles (PEN)
+                </button>
+                <button class="checkout-btn" id="btnPayUSD"
+                    style="background: linear-gradient(135deg, #3b82f6, #2563eb);" data-i18n="currency_usd">
+                    Dólares (USD/USDT)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2><i class="fa-solid fa-cart-shopping"></i> <span data-i18n="cart_title">Tu Carrito</span></h2>
+            <button class="close-cart" id="closeCartBtn"><i class="fa-solid fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span data-i18n="cart_total">Total:</span>
+                <span id="cartTotalSum">$0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn"><i class="fa-solid fa-credit-card"></i> <span
+                    data-i18n="checkout_btn">Finalizar Compra</span></button>
+            <button type="button" id="clearCartBtn" data-i18n="clear_cart_btn" style="width:100%; margin-top:0.8rem; background:transparent; border:none; color: var(--text-muted); font-size:0.85rem; cursor:pointer; text-decoration: underline; padding: 0.4rem;">Vaciar carrito</button>
+        </div>
+    </div>
+
+    <div id="historyModal" class="modal-overlay">
+        <div class="modal-content history-modal-content">
+            <button class="close-modal" id="closeHistoryBtn">&times;</button>
+            <h2><i class="fa-solid fa-clock-rotate-left"></i> <span data-i18n="history_modal_title">Historial de
+                    Compras</span></h2>
+            <div id="historyBody" class="history-body">
+                <!-- Se llenará con JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <button id="themeToggleBtn" class="fab-theme" title="Invertir colores" data-i18n-title="theme_tooltip">
+        <i class="fa-solid fa-circle-half-stroke"></i>
+    </button>
+
+    <a href="https://wa.me/+51943470201?text=Hola,%20necesito%20ayuda%20o%20tengo%20dudas%20sobre%20un%20producto%20de%20la%20tienda."
+        target="_blank" class="fab-help fab-help-whatsapp" title="¿Necesitas ayuda?" data-i18n-title="help_tooltip">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="fab-tooltip" data-i18n="help_tooltip">¿Necesitas ayuda?</span>
+    </a>
+    <a href="https://t.me/" data-tg-message="Hola, tengo una consulta sobre los servicios de streaming/licencias."
+        target="_blank" rel="noopener" class="fab-help fab-help-telegram" title="Escríbenos por Telegram" data-i18n-title="help_tooltip_telegram">
+        <i class="fa-brands fa-telegram"></i>
+        <span class="fab-tooltip" data-i18n="help_tooltip_telegram">Escríbenos por Telegram</span>
+    </a>
+
+    <script src="js/circuit.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/shared_cart.js"></script>
+    <script type="module" src="js/app.js"></script>
+
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <div class="site-footer__brand">
+                <div class="site-footer__logo">💎</div>
+                <span class="site-footer__name">Pass Digital</span>
+                <span class="site-footer__year">2026</span>
+                <div class="site-footer__contact-row">
+                    <span class="site-footer__label" data-i18n="footer_email_label">Correo:</span>
+                    <a href="mailto:ventasenlineavel@gmail.com" class="site-footer__email">ventasenlineavel@gmail.com</a>
+                    <a href="https://mail.google.com/mail/?view=cm&to=ventasenlineavel@gmail.com" target="_blank" class="site-footer__btn" data-i18n="footer_contact_btn">Contactar</a>
+                </div>
+                <div class="site-footer__contact-row">
+                    <span class="site-footer__label">WhatsApp:</span>
+                    <a href="https://wa.me/51943470201" target="_blank" class="site-footer__email">+51 943 470 201</a>
+                    <a href="https://wa.me/51943470201" target="_blank" class="site-footer__btn" data-i18n="footer_contact_btn">Contactar</a>
+                </div>
+            </div>
+            <div class="site-footer__divider"></div>
+            <div class="site-footer__hours">
+                <span class="site-footer__hours-title" data-i18n="footer_hours_title">🕐 Horarios</span>
+                <div class="site-footer__hours-row">
+                    <span class="site-footer__hours-day" data-i18n="footer_day_mf">Lunes - Viernes:</span>
+                    <span class="site-footer__hours-time">09:00 - 18:00</span>
+                </div>
+                <div class="site-footer__hours-row">
+                    <span class="site-footer__hours-day" data-i18n="footer_day_sat">Sábado:</span>
+                    <span class="site-footer__hours-time">10:00 - 17:00</span>
+                </div>
+                <div class="site-footer__hours-row">
+                    <span class="site-footer__hours-day" data-i18n="footer_day_sun">Domingo:</span>
+                    <span class="site-footer__hours-time site-footer__hours-closed" data-i18n="footer_closed">Cerrado</span>
+                </div>
+                <p class="site-footer__hours-note" data-i18n="footer_hours_note">Si no contestamos de manera inmediata, estamos ocupados/estudiando en la universidad. ¡Ténganos paciencia!</p>
+            </div>
+        </div>
+    <div class="site-footer__notice">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p data-i18n="footer_policy_notice">Si no respondemos de inmediato, es porque estamos ocupados o en clases de la universidad: les pedimos un poco de paciencia. Ante mensajes o llamadas insistentes y repetidas se enviará una primera advertencia; si la insistencia continúa, el acceso será bloqueado en todas las plataformas alquiladas y los pagos adelantados no serán reembolsados.</p>
+    </div>
+    </footer>
+</body>
+
+</html>
