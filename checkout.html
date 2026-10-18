@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Checkout - Pass Digital</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .checkout-container {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .checkout-header h1 {
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .cart-summary {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .cart-summary h3 {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-summary .total-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+            gap: 2rem;
+        }
+
+        .payment-method {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            background-color: rgba(99, 102, 241, 0.05);
+        }
+
+        .payment-method i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .method-info {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .method-number {
+            font-size: 1.2rem;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            user-select: all;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: var(--primary-hover);
+        }
+
+        .whatsapp-confirm {
+            margin-top: 2.5rem;
+            background-color: var(--whatsapp);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .whatsapp-confirm:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .telegram-confirm {
+            margin-top: 1rem;
+            background-color: var(--telegram);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .telegram-confirm:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(41, 169, 235, 0.4);
+        }
+
+        .activation-guide-btn {
+            display: none;
+            margin: 0 auto 2rem auto;
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.9rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 480px;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .activation-guide-btn:hover {
+            background-color: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .copy-btn {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            opacity: 0.6;
+            padding: 2px 4px;
+        }
+
+        .copy-btn:hover {
+            color: #ffffff;
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            .checkout-container {
+                padding: 1.5rem 1rem;
+                margin: 1.5rem auto;
+            }
+
+            .payment-methods {
+                gap: 1rem;
+            }
+
+            .payment-method {
+                padding: 1.2rem;
+            }
+
+            .method-number {
+                font-size: 0.95rem !important;
+                padding: 0.5rem;
+            }
+
+            .method-number span {
+                font-size: 0.75rem !important;
+            }
+        }
+    </style>
+    <script>
+        if (localStorage.getItem('appTheme') === 'light') {
+            document.documentElement.classList.add('light-mode');
+        }
+    </script>
+</head>
+
+<body>
+    <header class="navbar" style="justify-content: center;">
+        <div class="brand-name">
+            <a href="index.html" style="text-decoration: none;">
+                <h1>Pass Digital</h1>
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="checkout-container">
+            <div class="checkout-header">
+                <h1 data-i18n="checkout_title">Finalizar Compra</h1>
+                <p data-i18n="checkout_desc">Selecciona tu método de pago preferido, realiza el pago y envíanos tu comprobante mediante WhatsApp.
+                </p>
+            </div>
+
+            <div class="cart-summary">
+                <h3 data-i18n="total_a_pagar">Total a Pagar</h3>
+                <div class="total-amount" id="displayTotal">$0.00</div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="#" id="activationGuideBtn" class="activation-guide-btn" target="_blank">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span data-i18n="activation_guide_btn">¿Necesitas guía de activación para la(s) licencia(s)?</span>
+                </a>
+            </div>
+
+            <div class="payment-methods" <!-- Yape -->
+                <div class="payment-method yape method-pen" style="display: none;">
+                    <i class="fa-solid fa-mobile-screen-button" style="color: #8A2B6D;"></i>
+                    <div class="method-info">Yape</div>
+                    <div class="method-number"
+                        style="display:flex; align-items:center; justify-content:center; gap:0.5rem;">+51 943 470 201 <i
+                            class="fa-regular fa-copy copy-btn" data-copy="+51943470201" title="Copiar" data-i18n-title="copy_title"></i></div>
+                    <div style="margin-top: 1rem; display: flex; justify-content: center;">
+                        <img src="img/qr-yape.png" alt="QR Yape Maurizio Achata Culque"
+                            style="width: 200px; max-width: 100%; border-radius: 12px; border: 2px solid var(--border-color);">
+                    </div>
+                    <p style="font-size: 0.9rem; color: #fff; margin-top: 0.6rem; font-weight: bold;" data-i18n="pay_with_yape">Paga con Yape</p>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;"><span data-i18n="account_holder">A nombre de: Maurizio Jesús
+                        Achata Culque</span></p>
+                </div>
+                <!-- Plin -->
+                <div class="payment-method plin method-pen" style="display: none;">
+                    <i class="fa-solid fa-mobile-screen-button" style="color: #00B1A0;"></i>
+                    <div class="method-info">Plin</div>
+                    <div class="method-number"
+                        style="display:flex; align-items:center; justify-content:center; gap:0.5rem;">+51 943 470 201 <i
+                            class="fa-regular fa-copy copy-btn" data-copy="+51943470201" title="Copiar" data-i18n-title="copy_title"></i></div>
+                    <div style="margin-top: 1rem; display: flex; justify-content: center;">
+                        <img src="img/qr-plin.png" alt="QR Plin Maurizio Achata Culque"
+                            style="width: 200px; max-width: 100%; border-radius: 12px; border: 2px solid var(--border-color);">
+                    </div>
+                    <p style="font-size: 0.9rem; color: #fff; margin-top: 0.6rem; font-weight: bold;" data-i18n="pay_with_plin">Paga con Plin</p>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;"><span data-i18n="account_holder">A nombre de: Maurizio Jesús
+                        Achata Culque</span></p>
+                </div>
+                <div class="payment-method transfer method-pen" style="display: none;">
+                    <i class="fa-solid fa-building-columns" style="color: #3b82f6;"></i>
+                    <div class="method-info" data-i18n="transf_bcp">Transf. Bancaria (BCP)</div>
+                    <div class="method-number"
+                        style="font-size: 1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CTA: 19111431957030 <i class="fa-regular fa-copy copy-btn" data-copy="19111431957030"
+                            title="Copiar" data-i18n-title="copy_title"></i></div>
+                    <div class="method-number"
+                        style="font-size: 1rem; margin-top:0.3rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CCI: 00219111143195703053 <i class="fa-regular fa-copy copy-btn"
+                            data-copy="00219111143195703053" title="Copiar" data-i18n-title="copy_title"></i></div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;"><span data-i18n="account_holder">A nombre de: Maurizio Jesús
+                        Achata Culque</span></p>
+                </div>
+                <div class="payment-method transfer method-pen" style="display: none;">
+                    <i class="fa-solid fa-building-columns" style="color: #004481;"></i>
+                    <div class="method-info" data-i18n="transf_bbva">Transf. Bancaria (BBVA)</div>
+                    <div class="method-number"
+                        style="font-size: 1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CTA: 0011-0814-0266500861 <i class="fa-regular fa-copy copy-btn" data-copy="001108140266500861"
+                            title="Copiar" data-i18n-title="copy_title"></i></div>
+                    <div class="method-number"
+                        style="font-size: 1rem; margin-top:0.3rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CCI: 01181400026650086117 <i class="fa-regular fa-copy copy-btn"
+                            data-copy="01181400026650086117" title="Copiar" data-i18n-title="copy_title"></i></div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;"><span data-i18n="account_holder">A nombre de: Maurizio Jesús
+                        Achata Culque</span></p>
+                </div>
+                <!-- Transferencia Scotiabank -->
+                <div class="payment-method transfer method-pen" style="display: none;">
+                    <i class="fa-solid fa-building-columns" style="color: #ed2124;"></i>
+                    <div class="method-info" data-i18n="transf_scotia">Transf. Bancaria (Scotiabank)</div>
+                    <div class="method-number"
+                        style="font-size: 1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CTA: 5622202280 <i class="fa-regular fa-copy copy-btn" data-copy="5622202280"
+                            title="Copiar" data-i18n-title="copy_title"></i></div>
+                    <div class="method-number"
+                        style="font-size: 1rem; margin-top:0.3rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CCI: 00901020562220228008 <i class="fa-regular fa-copy copy-btn"
+                            data-copy="00901020562220228008" title="Copiar" data-i18n-title="copy_title"></i></div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;"><span data-i18n="account_holder">A nombre de: Maurizio Jesús
+                        Achata Culque</span></p>
+                </div>
+                <!-- Binance -->
+                <div class="payment-method binance method-usd" style="display: none;">
+                    <i class="fa-brands fa-bitcoin" style="color: #F3BA2F;"></i>
+                    <div class="method-info">Binance (USDT)</div>
+                    <div class="method-number"
+                        style="font-size: 1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        Pay ID:
+                        <span
+                            style="font-size:0.8rem; word-break:break-all;">0x7ba7b788faf6999da03455abc4f171635c0ae8fc</span>
+                        <i class="fa-regular fa-copy copy-btn" data-copy="0x7ba7b788faf6999da03455abc4f171635c0ae8fc"
+                            title="Copiar" data-i18n-title="copy_title"></i>
+                    </div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;"><span data-i18n="network_label">Red: USDT (TetherUS) -&gt; BNB Smart Chain (BEP20)</span></p>
+                </div>
+                <!-- PayPal -->
+                <div class="payment-method paypal method-usd" style="display: none;">
+                    <i class="fa-brands fa-paypal" style="color: #00457C;"></i>
+                    <div class="method-info">PayPal (USD)</div>
+                    <div style="margin-top: 1rem; display: flex; justify-content: center;">
+                        <img src="img/PAYPAL.jpeg" alt="PayPal QR Maurizio Achata Culque"
+                            style="width: 220px; max-width: 100%; border-radius: 12px; border: 2px solid var(--border-color);">
+                    </div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.8rem;"><span data-i18n="scan_or_click">Escanear código o hacer clic en el enlace:</span></p>
+                    <a href="https://paypal.me/MaurizioAchataCulque" target="_blank" style="display: inline-block; margin-top: 0.5rem; color: #3b82f6; text-decoration: none; font-weight: bold; font-size: 0.95rem; background: rgba(59, 130, 246, 0.1); padding: 0.4rem 0.8rem; border-radius: 6px;">
+                        <i class="fa-solid fa-link"></i> paypal.me/MaurizioAchataCulque
+                    </a>
+                </div>
+
+                <div class="payment-method transfer method-usd" style="display: none;">
+                    <i class="fa-solid fa-building-columns" style="color: #3b82f6;"></i>
+                    <div class="method-info" data-i18n="transf_bcp_usd">Transf. Bancaria BCP (USD)</div>
+                    <div class="method-number"
+                        style="font-size: 1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CTA: 19112033375123 <i class="fa-regular fa-copy copy-btn" data-copy="19112033375123"
+                            title="Copiar" data-i18n-title="copy_title"></i></div>
+                    <div class="method-number"
+                        style="font-size: 1rem; margin-top:0.3rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CCI: 00219111203337512353 <i class="fa-regular fa-copy copy-btn"
+                            data-copy="00219111203337512353" title="Copiar" data-i18n-title="copy_title"></i></div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;"><span data-i18n="account_holder">A nombre de: Maurizio Jesús
+                        Achata Culque</span></p>
+                </div>
+
+                <div class="payment-method transfer method-usd" style="display: none;">
+                    <i class="fa-solid fa-building-columns" style="color: #004481;"></i>
+                    <div class="method-info" data-i18n="transf_bbva_usd">Transf. Bancaria BBVA (USD)</div>
+                    <div class="method-number"
+                        style="font-size: 1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CTA: 0011-0814-0280051298 <i class="fa-regular fa-copy copy-btn"
+                            data-copy="0011-0814-0280051298" title="Copiar" data-i18n-title="copy_title"></i></div>
+                    <div class="method-number"
+                        style="font-size: 1rem; margin-top:0.3rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CCI: 01181400028005129816 <i class="fa-regular fa-copy copy-btn"
+                            data-copy="01181400028005129816" title="Copiar" data-i18n-title="copy_title"></i></div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;"><span data-i18n="account_holder">A nombre de: Maurizio Jesús
+                        Achata Culque</span></p>
+                </div>
+
+                <div class="payment-method transfer method-usd" style="display: none;">
+                    <i class="fa-solid fa-building-columns" style="color: #ed2124;"></i>
+                    <div class="method-info" data-i18n="transf_scotia_usd">Transf. Bancaria Scotiabank (USD)</div>
+                    <div class="method-number"
+                        style="font-size: 1rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CTA: 5622287975 <i class="fa-regular fa-copy copy-btn" data-copy="5622287975"
+                            title="Copiar" data-i18n-title="copy_title"></i></div>
+                    <div class="method-number"
+                        style="font-size: 1rem; margin-top:0.3rem; display:flex; align-items:center; justify-content:center; gap:0.5rem;">
+                        CCI: 00901021562228797509 <i class="fa-regular fa-copy copy-btn"
+                            data-copy="00901021562228797509" title="Copiar" data-i18n-title="copy_title"></i></div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem;"><span data-i18n="account_holder">A nombre de: Maurizio Jesús
+                        Achata Culque</span></p>
+                </div>
+
+
+            </div>
+
+            <a href="https://wa.me/51943470201" target="_blank" class="whatsapp-confirm" id="waConfirmBtn">
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="send_receipt_wa">Enviar comprobante por WhatsApp</span>
+            </a>
+
+            <a href="https://t.me/" target="_blank" rel="noopener" class="telegram-confirm" id="tgConfirmBtn">
+                <i class="fa-brands fa-telegram"></i> <span data-i18n="send_receipt_tg">Enviar comprobante por Telegram</span>
+            </a>
+
+            <div style="text-align: center;">
+                <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="back_to_store">Volver a la tienda</span></a>
+            </div>
+        </div>
+    </main>
+
+    <div id="telegramModal" class="modal-overlay">
+        <div class="modal-content modal-single" style="max-width: 480px; text-align: left;">
+            <button class="close-modal" id="closeTelegramModal"><i class="fa-solid fa-times"></i></button>
+            <div class="modal-header" style="margin-bottom: 1.2rem;">
+                <h2 style="font-size: 1.3rem; color: #fff;"><i class="fa-brands fa-telegram" style="color: var(--telegram); margin-right: 8px;"></i> <span data-i18n="tg_modal_title">Enviar por Telegram</span></h2>
+                <p style="margin-top: 0.6rem; font-size: 0.92rem; color: var(--text-muted);" data-i18n="tg_modal_desc">Telegram no siempre precarga el mensaje automáticamente. Copia tu pedido con el botón de abajo, pégalo en el chat que se abrió y envía ahí también tu comprobante de pago.</p>
+            </div>
+            <textarea id="tgModalMessage" readonly rows="8" style="width:100%; padding:0.9rem; border-radius:12px; background: var(--bg-dark); color: var(--text-main); border: 1px solid var(--border-color); resize: vertical; font-family: inherit; font-size: 0.88rem; line-height: 1.4;"></textarea>
+            <button type="button" id="copyTgMessageBtn" class="checkout-btn" style="width:100%; margin-top: 1rem; background: linear-gradient(135deg, var(--telegram), #1c8ed6);">
+                <i class="fa-regular fa-copy"></i> <span data-i18n="tg_modal_copy">Copiar mensaje</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+    window.PAGE_I18N = {
+        es: {
+            page_title: 'Checkout - Pass Digital',
+            checkout_title: 'Finalizar Compra',
+            checkout_desc: 'Selecciona tu método de pago preferido, realiza el pago y envíanos tu comprobante mediante WhatsApp.',
+            total_a_pagar: 'Total a Pagar',
+            transf_bcp: 'Transf. Bancaria (BCP)',
+            transf_bbva: 'Transf. Bancaria (BBVA)',
+            transf_scotia: 'Transf. Bancaria (Scotiabank)',
+            transf_bcp_usd: 'Transf. Bancaria BCP (USD)',
+            transf_bbva_usd: 'Transf. Bancaria BBVA (USD)',
+            transf_scotia_usd: 'Transf. Bancaria Scotiabank (USD)',
+            account_holder: 'A nombre de: Maurizio Jesús Achata Culque',
+            network_label: 'Red: USDT (TetherUS) -> BNB Smart Chain (BEP20)',
+            scan_or_click: 'Escanear código o hacer clic en el enlace:',
+            send_receipt_wa: 'Enviar comprobante por WhatsApp',
+            send_receipt_tg: 'Enviar comprobante por Telegram',
+            tg_modal_title: 'Enviar por Telegram',
+            tg_modal_desc: 'Telegram no siempre precarga el mensaje automáticamente. Copia tu pedido con el botón de abajo, pégalo en el chat que se abrió y envía ahí también tu comprobante de pago.',
+            tg_modal_copy: 'Copiar mensaje',
+            tg_modal_copied: '¡Copiado!',
+            copy_title: 'Copiar',
+            pay_with_yape: 'Paga con Yape',
+            pay_with_plin: 'Paga con Plin',
+            activation_guide_btn: '¿Necesitas guía de activación para la(s) licencia(s)?'
+        },
+        en: {
+            page_title: 'Checkout - Pass Digital',
+            checkout_title: 'Checkout',
+            checkout_desc: 'Select your preferred payment method, make the payment, and send us your receipt via WhatsApp.',
+            total_a_pagar: 'Total to Pay',
+            transf_bcp: 'Bank Transfer (BCP)',
+            transf_bbva: 'Bank Transfer (BBVA)',
+            transf_scotia: 'Bank Transfer (Scotiabank)',
+            transf_bcp_usd: 'Bank Transfer BCP (USD)',
+            transf_bbva_usd: 'Bank Transfer BBVA (USD)',
+            transf_scotia_usd: 'Bank Transfer Scotiabank (USD)',
+            account_holder: 'Account holder: Maurizio Jesús Achata Culque',
+            network_label: 'Network: USDT (TetherUS) -> BNB Smart Chain (BEP20)',
+            scan_or_click: 'Scan the code or click the link:',
+            send_receipt_wa: 'Send receipt via WhatsApp',
+            send_receipt_tg: 'Send receipt via Telegram',
+            tg_modal_title: 'Send via Telegram',
+            tg_modal_desc: "Telegram doesn't always preload the message automatically. Copy your order with the button below, paste it into the chat that opened, and send your payment receipt there too.",
+            tg_modal_copy: 'Copy message',
+            tg_modal_copied: 'Copied!',
+            copy_title: 'Copy',
+            pay_with_yape: 'Pay with Yape',
+            pay_with_plin: 'Pay with Plin',
+            activation_guide_btn: 'Need an activation guide for your license(s)?'
+        }
+    };
+    </script>
+    <script src="js/i18n.js"></script>
+    <script>window.SHARED_CART_NO_UI = true;</script>
+    <script src="js/config.js"></script>
+    <script src="js/shared_cart.js"></script>
+    <script>
+        const ACTIVATION_GUIDE_URL = "https://drive.google.com/drive/folders/1XeBtXsQasL5zQF9r9-Qm-7j8tndIcn17?usp=drive_link";
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const preferredCurrency = localStorage.getItem('preferredCurrency') || 'PEN';
+            const { totalPEN, totalUSD } = window.getCartTotals();
+
+            const ACTIVATION_GUIDE_CATEGORIES = ['antivirus', 'windows', 'noping', 'combos'];
+
+            const activationBtn = document.getElementById('activationGuideBtn');
+            if (activationBtn) {
+                const cartHasActivationCategory = window.cart.some(
+                    item => item.category && ACTIVATION_GUIDE_CATEGORIES.includes(item.category)
+                );
+                if (cartHasActivationCategory) {
+                    activationBtn.style.display = 'flex';
+                    activationBtn.href = ACTIVATION_GUIDE_URL;
+                } else {
+                    activationBtn.style.display = 'none';
+                }
+            }
+
+            const displayedTotal = preferredCurrency === 'USD'
+                ? '$' + totalUSD.toFixed(2) + ' USD'
+                : totalPEN.toFixed(2) + ' PEN';
+            document.getElementById('displayTotal').innerText = displayedTotal;
+
+            if (preferredCurrency === 'PEN') {
+                document.querySelectorAll('.method-pen').forEach(el => el.style.display = 'flex');
+                document.querySelectorAll('.method-usd').forEach(el => el.style.display = 'none');
+            } else {
+                document.querySelectorAll('.method-pen').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.method-usd').forEach(el => el.style.display = 'flex');
+            }
+
+            const waBtn = document.getElementById('waConfirmBtn');
+            const tgBtn = document.getElementById('tgConfirmBtn');
+            const phone = "51943470201";
+
+            // Referencia de pedido: no existe un backend/base de datos que asigne
+            // un número de pedido real, así que generamos una referencia local
+            // (fecha/hora) solo para que el cliente pueda mencionarla al
+            // escribir. No se guarda en ningún otro sistema.
+            const orderRef = 'PD-' + Date.now().toString().slice(-8);
+
+            // Resumen de pedido (nombre, cantidad, precio unitario y subtotal
+            // de CADA producto + total general) reutilizado tanto en WhatsApp
+            // como en Telegram, para no duplicar la lógica de cálculo.
+            const { itemsText, totalText } = window.formatOrderSummaryText(window.cart);
+            const hasItems = window.cart.length > 0;
+
+            const textoBase = hasItems
+                ? `Hola, hice el pedido ${orderRef}:\n${itemsText}\nTotal: ${totalText}\nLe envío el comprobante de pago.`
+                : `Hola, le envío el comprobante de pago.`;
+
+            waBtn.href = `https://wa.me/${phone}?text=${encodeURIComponent(textoBase)}`;
+
+            // Telegram reutiliza exactamente el mismo texto que WhatsApp. Nota
+            // técnica: t.me solo permite PRECARGAR el mensaje en el cuadro de
+            // texto; el cliente igual debe presionar "Enviar" del lado de
+            // Telegram (no se puede enviar el mensaje automáticamente).
+            if (tgBtn) {
+                tgBtn.href = window.buildTelegramLink ? window.buildTelegramLink(textoBase) : 'https://t.me/';
+            }
+
+            function saveOrderToHistory() {
+                try {
+                    if (window.cart.length === 0) return;
+
+                    let history = [];
+                    const historyStr = localStorage.getItem('purchaseHistory');
+                    if (historyStr) {
+                        history = JSON.parse(historyStr);
+                    }
+
+                    const dateObj = new Date();
+                    const date = dateObj.toLocaleDateString() + ' ' + dateObj.toLocaleTimeString();
+
+                    history.push({
+                        date: date,
+                        total: displayedTotal,
+                        items: window.cart
+                    });
+
+                    localStorage.setItem('purchaseHistory', JSON.stringify(history));
+
+                    window.clearCart();
+                } catch (e) {
+                    console.error("Error al guardar historial de compra", e);
+                }
+            }
+
+            waBtn.addEventListener('click', saveOrderToHistory);
+            if (tgBtn) tgBtn.addEventListener('click', saveOrderToHistory);
+
+            // Ventana/modal de respaldo para Telegram: como el precargado del
+            // mensaje no está garantizado en todos los clientes de Telegram,
+            // al hacer clic en "Enviar por Telegram" además se muestra este
+            // modal con el pedido completo y un botón para copiarlo, así el
+            // cliente puede pegarlo manualmente en el chat que se abrió y
+            // enviar ahí mismo su comprobante de pago.
+            const telegramModal = document.getElementById('telegramModal');
+            const tgModalMessage = document.getElementById('tgModalMessage');
+            const closeTelegramModal = document.getElementById('closeTelegramModal');
+            const copyTgMessageBtn = document.getElementById('copyTgMessageBtn');
+
+            if (tgModalMessage) tgModalMessage.value = textoBase;
+
+            if (tgBtn && telegramModal) {
+                tgBtn.addEventListener('click', () => {
+                    telegramModal.classList.add('active');
+                });
+            }
+            if (closeTelegramModal && telegramModal) {
+                closeTelegramModal.addEventListener('click', () => telegramModal.classList.remove('active'));
+            }
+            if (telegramModal) {
+                telegramModal.addEventListener('click', (e) => {
+                    if (e.target === telegramModal) telegramModal.classList.remove('active');
+                });
+            }
+            if (copyTgMessageBtn && tgModalMessage) {
+                copyTgMessageBtn.addEventListener('click', () => {
+                    navigator.clipboard.writeText(tgModalMessage.value).then(() => {
+                        const copyLabel = window.translate ? window.translate('tg_modal_copy') : 'Copiar mensaje';
+                        const copiedLabel = window.translate ? window.translate('tg_modal_copied') : '¡Copiado!';
+                        const span = copyTgMessageBtn.querySelector('span');
+                        if (span) span.textContent = copiedLabel;
+                        setTimeout(() => { if (span) span.textContent = copyLabel; }, 2000);
+                    }).catch(err => {
+                        console.error("Error al copiar el mensaje de Telegram: ", err);
+                        // Alternativa sin permisos de portapapeles: seleccionar el texto
+                        // para que el cliente pueda copiarlo manualmente (Ctrl/Cmd+C).
+                        tgModalMessage.focus();
+                        tgModalMessage.select();
+                    });
+                });
+            }
+
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const text = btn.getAttribute('data-copy');
+                    navigator.clipboard.writeText(text).then(() => {
+                        // Cambiar icono temporalmente a un check
+                        btn.classList.remove('fa-regular', 'fa-copy');
+                        btn.classList.add('fa-solid', 'fa-check');
+                        btn.style.color = '#25d366'; // color éxito
+
+                        setTimeout(() => {
+                            btn.classList.remove('fa-solid', 'fa-check');
+                            btn.classList.add('fa-regular', 'fa-copy');
+                            btn.style.color = '';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error("Error al copiar texto: ", err);
+                    });
+                });
+            });
+        });
+    </script>
+    <a href="https://wa.me/+51943470201?text=Hola,%20necesito%20ayuda%20o%20tengo%20dudas%20sobre%20un%20producto%20de%20la%20tienda."
+        target="_blank" class="fab-help fab-help-whatsapp" title="¿Necesitas ayuda?" data-i18n-title="help_tooltip">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="fab-tooltip" data-i18n="help_tooltip">¿Necesitas ayuda?</span>
+    </a>
+    <a href="https://t.me/" data-tg-message="Hola, tengo una consulta sobre los servicios de streaming/licencias."
+        target="_blank" rel="noopener" class="fab-help fab-help-telegram" title="Escríbenos por Telegram" data-i18n-title="help_tooltip_telegram">
+        <i class="fa-brands fa-telegram"></i>
+        <span class="fab-tooltip" data-i18n="help_tooltip_telegram">Escríbenos por Telegram</span>
+    </a>
+
+    <button id="themeToggleBtn" class="fab-theme" title="Invertir colores" data-i18n-title="theme_tooltip">
+        <i class="fa-solid fa-circle-half-stroke"></i>
+    </button>
+
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <div class="site-footer__brand">
+                <div class="site-footer__logo">💎</div>
+                <span class="site-footer__name">Pass Digital</span>
+                <span class="site-footer__year">2026</span>
+                <div class="site-footer__contact-row">
+                    <span class="site-footer__label" data-i18n="footer_email_label">Correo:</span>
+                    <a href="mailto:ventasenlineavel@gmail.com" class="site-footer__email">ventasenlineavel@gmail.com</a>
+                    <a href="https://mail.google.com/mail/?view=cm&to=ventasenlineavel@gmail.com" target="_blank" class="site-footer__btn" data-i18n="footer_contact_btn">Contactar</a>
+                </div>
+                <div class="site-footer__contact-row">
+                    <span class="site-footer__label">WhatsApp:</span>
+                    <a href="https://wa.me/51943470201" target="_blank" class="site-footer__email">+51 943 470 201</a>
+                    <a href="https://wa.me/51943470201" target="_blank" class="site-footer__btn" data-i18n="footer_contact_btn">Contactar</a>
+                </div>
+            </div>
+            <div class="site-footer__divider"></div>
+            <div class="site-footer__hours">
+                <span class="site-footer__hours-title" data-i18n="footer_hours_title">🕐 Horarios</span>
+                <div class="site-footer__hours-row">
+                    <span class="site-footer__hours-day" data-i18n="footer_day_mf">Lunes - Viernes:</span>
+                    <span class="site-footer__hours-time">09:00 - 18:00</span>
+                </div>
+                <div class="site-footer__hours-row">
+                    <span class="site-footer__hours-day" data-i18n="footer_day_sat">Sábado:</span>
+                    <span class="site-footer__hours-time">10:00 - 17:00</span>
+                </div>
+                <div class="site-footer__hours-row">
+                    <span class="site-footer__hours-day" data-i18n="footer_day_sun">Domingo:</span>
+                    <span class="site-footer__hours-time">10:00 - 17:00</span>
+                </div>
+                <p class="site-footer__hours-note" data-i18n="footer_hours_note">Si no contestamos de manera inmediata, estamos ocupados/estudiando en la universidad. ¡Ténganos paciencia!</p>
+            </div>
+        </div>
+    <div class="site-footer__notice">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p data-i18n="footer_policy_notice">Si no respondemos de inmediato, es porque estamos ocupados o en clases de la universidad: les pedimos un poco de paciencia. Ante mensajes o llamadas insistentes y repetidas se enviará una primera advertencia; si la insistencia continúa, el acceso será bloqueado en todas las plataformas alquiladas y los pagos adelantados no serán reembolsados.</p>
+    </div>
+    </footer>
+</body>
+
+</html>
