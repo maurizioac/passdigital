@@ -3,6 +3,8 @@
 
     const COMMON = {
         es: {
+            service_closing_title: 'Aviso importante: cierre del servicio',
+            service_closing_message: 'El 31 de octubre de 2026 cerraremos nuestros servicios de venta de streaming y licencias. Gracias de corazón a quienes confiaron en nosotros desde el comienzo, cuando este emprendimiento recién empezaba. Gracias a ustedes pudimos crecer y llegar hasta aquí. Llevamos su apoyo con mucho cariño y gratitud.',
             back_to_catalog: 'Volver al catálogo',
             back_to_store: 'Volver a la tienda',
             add_to_cart: 'Agregar al carrito',
@@ -48,6 +50,8 @@
             units_word: 'uds'
         },
         en: {
+            service_closing_title: 'Important notice: service closure',
+            service_closing_message: 'On October 31, 2026, we will close our streaming and license sales services. We are deeply grateful to everyone who trusted us from the beginning, when this venture was just starting. Thanks to you, we were able to grow and reach this point. We will always remember your support with gratitude.',
             back_to_catalog: 'Back to catalog',
             back_to_store: 'Back to store',
             add_to_cart: 'Add to cart',
