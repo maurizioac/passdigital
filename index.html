@@ -9,6 +9,30 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .service-closing-notice {
+            max-width: 1100px;
+            margin: 1.5rem auto 0;
+            padding: 1rem 1.25rem;
+            border: 1px solid rgba(245, 158, 11, 0.45);
+            border-left: 4px solid #f59e0b;
+            border-radius: 12px;
+            background: rgba(245, 158, 11, 0.08);
+            color: var(--text-main);
+            line-height: 1.65;
+        }
+        .service-closing-notice strong {
+            display: block;
+            margin-bottom: 0.35rem;
+            color: #fbbf24;
+        }
+        .service-closing-notice p { margin: 0; }
+        html.light-mode .service-closing-notice { color: #334155; }
+        html.light-mode .service-closing-notice strong { color: #b45309; }
+        @media (max-width: 600px) {
+            .service-closing-notice { margin: 1rem 1rem 0; padding: 0.9rem 1rem; }
+        }
+    </style>
     <script>
         if (localStorage.getItem('appTheme') === 'light') {
             document.documentElement.classList.add('light-mode');
@@ -193,6 +217,10 @@
 </a>
         </div>
     </section>
+    <aside class="service-closing-notice container" role="status" aria-labelledby="serviceClosingTitle">
+        <strong id="serviceClosingTitle" data-i18n="service_closing_title">Aviso importante: cierre del servicio</strong>
+        <p data-i18n="service_closing_message">El 31 de octubre de 2026 cerraremos nuestros servicios de venta de streaming y licencias. Gracias de corazón a quienes confiaron en nosotros desde el comienzo, cuando este emprendimiento recién empezaba. Gracias a ustedes pudimos crecer y llegar hasta aquí. Llevamos su apoyo con mucho cariño y gratitud.</p>
+    </aside>
     <main class="container">
         <!-- Products Grid -->
         <section class="products-section">
